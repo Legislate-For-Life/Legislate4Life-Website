@@ -27,8 +27,8 @@ export const CONTACT_INFO = {
 } as const;
 
 export const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/legislateforlife",
-  tiktok: "https://tiktok.com/@legislateforlife",
+  instagram: "https://www.instagram.com/legislate4life",
+  tiktok: "https://www.tiktok.com/@legislate4life",
   linkedin: "https://linkedin.com/company/legislateforlife",
 } as const;
 

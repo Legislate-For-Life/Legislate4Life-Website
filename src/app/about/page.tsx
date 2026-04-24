@@ -13,17 +13,17 @@ const teamMembers: TeamMember[] = [
   {
     name: "Geetika Boppana",
     role: "Co-Founder",
-    bio: "Geetika helps lead Legislate for Life's advocacy and outreach, bringing together policy work and community engagement.",
+    bio: "Helps lead Legislate for Life's advocacy, bringing together policy work and community engagement.",
   },
   {
     name: "Aryan Patel",
     role: "Co-Founder",
-    bio: "Aryan focuses on policy research and partnerships, translating on-the-ground realities into concrete legislative priorities.",
+    bio: "Focueses on team management, working with our members to get things done.",
   },
   {
     name: "Vishnu Donadula",
-    role: "Web Developer",
-    bio: "Vishnu drives our digital strategy and operations, building the tools and systems that let our team reach farther.",
+    role: "Web Developer & Designer",
+    bio: "Works on digital technology and operations, building the tools and systems that let our team make an impact.",
   },
 ];
 

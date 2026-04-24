@@ -3,7 +3,7 @@ export interface NavLink {
   href: string;
 }
 
-export interface BlogPost {
+export interface Article {
   slug: string;
   title: string;
   excerpt: string;
@@ -28,4 +28,20 @@ export interface ActionCard {
   description: string;
   href: string;
   linkText: string;
+}
+
+export interface Legislation {
+  title: string;
+  billNumber?: string;
+  status: "Introduced" | "In Committee" | "Passed" | "Enacted" | "Proposed";
+  summary: string;
+}
+
+export interface StatePolicyPage {
+  slug: string;
+  name: string;
+  abbreviation: string;
+  summary: string;
+  research: string[];
+  legislation: Legislation[];
 }

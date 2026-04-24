@@ -13,9 +13,9 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="text-center py-12 px-6 bg-primary-50 rounded-xl">
+      <div className="text-center py-12 px-6 bg-cream-50 border border-gold-300 rounded-xl">
         <svg
-          className="w-12 h-12 text-primary-500 mx-auto mb-4"
+          className="w-12 h-12 text-gold-500 mx-auto mb-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -31,12 +31,12 @@ export default function ContactForm() {
           Thank You!
         </h3>
         <p className="text-muted-foreground">
-          Your message has been received. We&apos;ll get back to you as soon as
-          possible.
+          Your message has been received. We typically respond within 1–2
+          business days.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-4 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+          className="mt-4 text-sm font-medium text-gold-600 hover:text-gold-700 transition-colors"
         >
           Send another message
         </button>
@@ -58,7 +58,7 @@ export default function ContactForm() {
           name="name"
           type="text"
           required
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
           placeholder="Your full name"
         />
       </div>
@@ -74,7 +74,7 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
           placeholder="your@email.com"
         />
       </div>
@@ -90,7 +90,7 @@ export default function ContactForm() {
           name="subject"
           type="text"
           required
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
           placeholder="What is this regarding?"
         />
       </div>
@@ -106,7 +106,7 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-y"
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y"
           placeholder="Tell us how we can help..."
         />
       </div>

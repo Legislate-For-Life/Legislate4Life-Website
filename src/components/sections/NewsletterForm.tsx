@@ -8,8 +8,8 @@ export default function NewsletterForm() {
 
   if (submitted) {
     return (
-      <p className="text-sm text-primary-600 font-medium py-3">
-        Thanks for subscribing! We&apos;ll keep you updated.
+      <p className="text-sm text-gold-700 font-medium py-3">
+        Thanks for subscribing! You&apos;ll hear from us with our next update.
       </p>
     );
   }
@@ -30,7 +30,7 @@ export default function NewsletterForm() {
         type="email"
         required
         placeholder="Enter your email"
-        className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        className="flex-1 px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
       />
       <Button type="submit">Subscribe</Button>
     </form>

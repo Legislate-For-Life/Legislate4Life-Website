@@ -1,13 +1,13 @@
-import type { BlogPost } from "@/lib/types";
+import type { Article } from "@/lib/types";
 
-export const blogPosts: BlogPost[] = [
+export const articles: Article[] = [
   {
     slug: "understanding-farmer-stress",
     title: "Understanding the Unique Stressors Facing American Farmers",
     excerpt:
       "From unpredictable weather to fluctuating markets, farmers face a combination of pressures that can take a serious toll on mental health. Here's what you need to know.",
     date: "2026-03-15",
-    author: "Legislate4Life Team",
+    author: "Legislate for Life Team",
     content: `Farming has always been one of the most demanding professions in America. But in recent years, the pressures on farmers have intensified in ways that are taking a serious toll on mental health.
 
 ## The Perfect Storm of Stressors
@@ -28,7 +28,7 @@ Yet many farmers are reluctant to seek help. Cultural expectations of self-relia
 
 ## What Can Be Done
 
-This is exactly why Legislate4Life exists. We believe that systemic change — through legislation, funding, and community programs — is essential to addressing the mental health crisis in farming communities.
+This is exactly why Legislate for Life exists. We believe that systemic change — through legislation, funding, and community programs — is essential to addressing the mental health crisis in farming communities.
 
 We advocate for increased funding for rural mental health services, telehealth access for remote communities, and educational programs that help farmers recognize and respond to mental health challenges.`,
   },
@@ -38,7 +38,7 @@ We advocate for increased funding for rural mental health services, telehealth a
     excerpt:
       "The newest Farm Bill includes important provisions for rural mental health funding. We break down what's in it and what still needs to happen.",
     date: "2026-02-28",
-    author: "Legislate4Life Team",
+    author: "Legislate for Life Team",
     content: `The Farm Bill is one of the most significant pieces of legislation affecting American agriculture, and its latest iteration includes provisions that could meaningfully impact mental health support for farming communities.
 
 ## Key Mental Health Provisions
@@ -53,7 +53,7 @@ While the provisions are a step forward, advocates note several gaps. Funding le
 
 ## Our Continued Advocacy
 
-Legislate4Life will continue to push for comprehensive mental health support in agricultural policy. We believe that every farmer deserves access to affordable, stigma-free mental health care — and that starts with strong legislative action.`,
+Legislate for Life will continue to push for comprehensive mental health support in agricultural policy. We believe that every farmer deserves access to affordable, stigma-free mental health care — and that starts with strong legislative action.`,
   },
   {
     slug: "rural-telehealth-expansion",
@@ -61,7 +61,7 @@ Legislate4Life will continue to push for comprehensive mental health support in 
     excerpt:
       "Telehealth has emerged as a lifeline for rural communities. Learn how expanded access is helping farmers get the mental health support they need.",
     date: "2026-01-20",
-    author: "Legislate4Life Team",
+    author: "Legislate for Life Team",
     content: `For decades, one of the biggest barriers to mental health care in rural America has been simple geography. When the nearest therapist is a two-hour drive away, seeking help becomes a logistical challenge on top of an emotional one.
 
 Telehealth is changing that equation.
@@ -84,6 +84,6 @@ Telehealth isn't a complete solution. Broadband internet access remains limited 
 
 ## What We're Advocating For
 
-Legislate4Life supports policies that expand broadband access in rural communities, streamline cross-state telehealth licensing, and fund programs specifically designed to serve agricultural workers through virtual platforms.`,
+Legislate for Life supports policies that expand broadband access in rural communities, streamline cross-state telehealth licensing, and fund programs specifically designed to serve agricultural workers through virtual platforms.`,
   },
 ];

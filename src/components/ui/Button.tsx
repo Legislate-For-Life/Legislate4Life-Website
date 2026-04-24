@@ -15,11 +15,11 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500",
+    "bg-gold-500 text-ink-900 hover:bg-gold-400 focus-visible:ring-gold-400",
   secondary:
-    "bg-accent text-white hover:bg-primary-400 focus-visible:ring-accent",
+    "bg-ink-900 text-gold-200 hover:bg-ink-800 focus-visible:ring-ink-700",
   outline:
-    "border-2 border-primary-500 text-primary-500 hover:bg-primary-50 focus-visible:ring-primary-500",
+    "border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-gold-200 focus-visible:ring-ink-700",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

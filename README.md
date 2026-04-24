@@ -1,6 +1,6 @@
-# Legislate4Life
+# Legislate for Life
 
-Website for Legislate4Life, a nonprofit advocacy organization promoting farmers' mental health.
+Website for Legislate for Life, a nonprofit advocacy organization raising awareness and advancing mental health through policy reform and advocacy for farming communities.
 
 Built with [Next.js](https://nextjs.org/) (App Router), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
 

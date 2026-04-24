@@ -18,7 +18,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Aryan Patel",
     role: "Co-Founder",
-    bio: "Focueses on team management, working with our members to get things done.",
+    bio: "Focuses on team management, working with our members to get things done.",
   },
   {
     name: "Vishnu Donadula",

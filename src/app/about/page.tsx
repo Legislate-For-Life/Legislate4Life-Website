@@ -12,13 +12,8 @@ export const metadata: Metadata = {
 const teamMembers: TeamMember[] = [
   {
     name: "Geetika Boppana",
-    role: "Co-Founder",
+    role: "Founder",
     bio: "Helps lead Legislate for Life's advocacy, bringing together policy work and community engagement.",
-  },
-  {
-    name: "Aryan Patel",
-    role: "Co-Founder",
-    bio: "Focuses on team management, working with our members to get things done.",
   },
   {
     name: "Vishnu Donadula",

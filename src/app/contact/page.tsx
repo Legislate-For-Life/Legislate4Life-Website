@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/sections/ContactForm";
 import CrisisSupport from "@/components/sections/CrisisSupport";
-import { CONTACT_INFO, SOCIAL_LINKS } from "@/lib/constants";
+import { CONTACT_INFO, ORG_NAME, SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description:
-    "Get in touch with Legislate for Life. We respond within 1–2 business days.",
+  description: `Get in touch with ${ORG_NAME}. We respond within 1 to 2 business days.`,
 };
 
 export default function ContactPage() {
@@ -19,9 +18,10 @@ export default function ContactPage() {
             Say Hello
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Contact Us</h1>
-          <p className="mt-4 text-lg text-ink-200 max-w-2xl mx-auto">
-            Questions, ideas, opportunities — we&apos;d love to hear from you.
-            We respond within 1–2 business days.
+          <p className="mt-4 text-lg text-ink-200 max-w-2xl mx-auto leading-relaxed">
+            Questions, ideas, partnership opportunities, or research you think
+            we should be paying attention to. We&apos;d love to hear from you.
+            We respond within 1 to 2 business days.
           </p>
         </div>
       </section>

@@ -2,18 +2,23 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ORG_NAME,
-  FOOTER_LINKS,
+  FOOTER_LINKS_COL_1,
+  FOOTER_LINKS_COL_2,
   CONTACT_INFO,
   SOCIAL_LINKS,
 } from "@/lib/constants";
+import NewsletterForm from "@/components/sections/NewsletterForm";
+
+const COLUMN_LINK_CLASS =
+  "text-sm text-ink-200 hover:text-gold-200 transition-colors";
 
 export default function Footer() {
   return (
     <footer className="bg-ink-900 text-ink-100 border-t border-gold-600/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Brand & tagline */}
-          <div>
+          <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-4">
               <Image
                 src="/images/logo.png"
@@ -22,52 +27,97 @@ export default function Footer() {
                 height={48}
                 className="rounded-sm"
               />
-              <span className="text-base font-semibold tracking-widest uppercase text-gold-300">
+              <span className="text-sm font-semibold tracking-widest uppercase text-gold-300 leading-tight">
                 {ORG_NAME}
               </span>
             </Link>
             <p className="text-sm text-ink-200 leading-relaxed">
-              Advocating for mental health awareness, resources, and policy
-              reform for farming communities.
+              A nonprofit dedicated to public policy research, education, and
+              civic engagement. We help policymakers and communities understand
+              the issues shaping life across America and beyond.
             </p>
+            <div className="mt-6">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gold-400 text-ink-900 text-sm font-semibold hover:bg-gold-300 transition-colors"
+              >
+                Contact Us
+                <svg
+                  className="ml-2 w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
 
-          {/* Quick links */}
-          <div>
+          {/* Quick links: two columns */}
+          <div className="lg:col-span-3">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
               Quick Links
             </h3>
-            <ul className="space-y-2">
-              {FOOTER_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-ink-200 hover:text-gold-200 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+              <ul className="space-y-2">
+                {FOOTER_LINKS_COL_1.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={COLUMN_LINK_CLASS}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-2">
+                {FOOTER_LINKS_COL_2.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={COLUMN_LINK_CLASS}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-6">
+              <Link
+                href="/about/legal-resources"
+                className="text-xs uppercase tracking-widest text-gold-300 hover:text-gold-200 transition-colors"
+              >
+                Legal &amp; Resources →
+              </Link>
+            </div>
           </div>
 
-          {/* Contact & social */}
-          <div>
+          {/* Newsletter */}
+          <div className="lg:col-span-3">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
+              Stay in the Loop
+            </h3>
+            <p className="text-sm text-ink-200 leading-relaxed mb-4">
+              Monthly updates on our research, writing, and the policy
+              conversations we&apos;re tracking.
+            </p>
+            <NewsletterForm variant="dark" />
+          </div>
+
+          {/* Social + email */}
+          <div className="lg:col-span-2">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
               Connect
             </h3>
-            <ul className="space-y-2 text-sm text-ink-200">
-              <li>
-                <a
-                  href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-gold-200 transition-colors"
-                >
-                  {CONTACT_INFO.email}
-                </a>
-              </li>
-            </ul>
-
-            <div className="flex gap-3 mt-5">
+            <a
+              href={`mailto:${CONTACT_INFO.email}`}
+              className="block text-sm text-ink-200 hover:text-gold-200 transition-colors break-all mb-4"
+            >
+              {CONTACT_INFO.email}
+            </a>
+            <div className="flex gap-3">
               <a
                 href={SOCIAL_LINKS.instagram}
                 target="_blank"
@@ -109,7 +159,9 @@ export default function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {ORG_NAME}. All rights reserved.
           </p>
-          <p className="tracking-widest uppercase">Plant Awareness, Harvest Fairness</p>
+          <p className="tracking-widest uppercase">
+            Educating Policymakers. Empowering Communities.
+          </p>
         </div>
       </div>
     </footer>

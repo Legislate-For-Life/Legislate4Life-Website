@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CrisisSupportPopup from "@/components/sections/CrisisSupportPopup";
 import { ORG_NAME, ORG_DESCRIPTION } from "@/lib/constants";
 import "./globals.css";
 
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${ORG_NAME} — Advocating for Farmers' Mental Health`,
+    default: `${ORG_NAME} | Policy Research & Public Education`,
     template: `%s | ${ORG_NAME}`,
   },
   description: ORG_DESCRIPTION,
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CrisisSupportPopup />
       </body>
     </html>
   );

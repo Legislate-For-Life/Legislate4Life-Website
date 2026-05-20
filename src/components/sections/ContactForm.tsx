@@ -31,7 +31,7 @@ export default function ContactForm() {
           Thank You!
         </h3>
         <p className="text-muted-foreground">
-          Your message has been received. We typically respond within 1–2
+          Your message has been received. We typically respond within 1 to 2
           business days.
         </p>
         <button

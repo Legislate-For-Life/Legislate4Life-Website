@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Brand palette — deep charcoal with gold accent, matching the logo */
+  /* Brand palette: deep charcoal with gold accent, matching the logo */
   --color-ink-50: #f5f5f4;
   --color-ink-100: #e7e5e4;
   --color-ink-200: #d6d3d1;

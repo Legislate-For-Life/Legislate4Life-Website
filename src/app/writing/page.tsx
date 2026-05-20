@@ -6,7 +6,7 @@ import { articles } from "@/data/articles";
 export const metadata: Metadata = {
   title: "Writing",
   description:
-    "Articles, essays, and analysis on farmer mental health and policy from Legislate for Life.",
+    "Articles, essays, and analysis from The Legislative for Life Foundation on the policy issues we research and the public education work we do.",
 };
 
 export default function WritingPage() {
@@ -16,12 +16,12 @@ export default function WritingPage() {
       <section className="bg-ink-900 text-ink-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-300 mb-3">
-            Words, Research, Advocacy
+            Research, Analysis, Public Education
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Writing</h1>
-          <p className="mt-4 text-lg text-ink-200 max-w-2xl mx-auto">
-            Articles and analysis on farmer mental health, rural policy, and the
-            work ahead.
+          <p className="mt-4 text-lg text-ink-200 max-w-2xl mx-auto leading-relaxed">
+            Articles, explainers, and analysis from the foundation&apos;s
+            researchers and writers on the issues shaping public life.
           </p>
         </div>
       </section>
@@ -30,7 +30,7 @@ export default function WritingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="All Articles"
-            subtitle="Stay informed about the issues that matter to farming communities."
+            subtitle="The latest from the Center for Public Policy and our writing team."
           />
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => (

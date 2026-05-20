@@ -26,21 +26,22 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         <div className="max-w-3xl">
           <p className="text-gold-300 text-xs font-semibold uppercase tracking-[0.3em] mb-5">
-            Plant Awareness, Harvest Fairness
+            The Legislative for Life Foundation
           </p>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl leading-[1.1]">
-            Raising awareness, advancing{" "}
-            <span className="text-gold-300">mental health</span> through policy
-            reform and advocacy.
+            Educating policymakers. Empowering{" "}
+            <span className="text-gold-300">communities.</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-ink-200 leading-relaxed max-w-2xl">
-            Farming communities face unique mental health challenges. We
-            research, advocate, and organize so farmers get the legislative
-            action and support they deserve.
+            We translate research and lived experience into clear,
+            practical understanding of the issues shaping life across America
+            and beyond. Through policy analysis, public education, and
+            community engagement, we help leaders and neighbors make better
+            decisions together.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="/get-involved" size="lg">
-              Get Involved
+            <Button href="/join-us" size="lg">
+              Join Us
             </Button>
             <Button
               href="/about"
@@ -48,7 +49,7 @@ export default function Hero() {
               size="lg"
               className="border-gold-300 text-gold-200 hover:bg-gold-300/10"
             >
-              Our Mission
+              About the Foundation
             </Button>
           </div>
         </div>

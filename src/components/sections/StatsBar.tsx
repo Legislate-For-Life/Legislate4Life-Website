@@ -1,10 +1,10 @@
 import type { StatItem } from "@/lib/types";
 
 const stats: StatItem[] = [
-  { value: "1 in 4", label: "Farmers report high levels of stress daily" },
-  { value: "2x", label: "Suicide rate in rural areas vs. urban" },
-  { value: "60%", label: "Of rural counties lack a psychiatrist" },
-  { value: "10M+", label: "Farming families we aim to support" },
+  { value: "3", label: "Operating divisions driving our work" },
+  { value: "2", label: "States actively researched (VA, TX)" },
+  { value: "10+", label: "Open roles for students, researchers, and writers" },
+  { value: "100%", label: "Volunteer-led, mission-driven, nonpartisan" },
 ];
 
 export default function StatsBar() {

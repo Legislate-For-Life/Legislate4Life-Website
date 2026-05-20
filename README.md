@@ -1,8 +1,10 @@
-# Legislate for Life
+# The Legislative for Life Foundation
 
-Website for Legislate for Life, a nonprofit advocacy organization raising awareness and advancing mental health through policy reform and advocacy for farming communities.
+Website for The Legislative for Life Foundation, a nonprofit dedicated to public
+policy research, education, and civic engagement.
 
-Built with [Next.js](https://nextjs.org/) (App Router), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
+Built with [Next.js](https://nextjs.org/) (App Router), [TypeScript](https://www.typescriptlang.org/),
+and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Getting Started
 
@@ -30,65 +32,89 @@ npm start
 
 ```
 src/
-├── app/                    # Pages (Next.js App Router)
-│   ├── layout.tsx          # Root layout — shared header & footer
-│   ├── page.tsx            # Home page
-│   ├── about/page.tsx      # About page
-│   ├── get-involved/page.tsx
-│   ├── contact/page.tsx
-│   └── blog/
-│       ├── page.tsx        # Blog listing
-│       └── [slug]/page.tsx # Individual blog post
+├── app/                          # Pages (Next.js App Router)
+│   ├── layout.tsx                # Root layout: shared header, footer, crisis popup
+│   ├── page.tsx                  # Home page
+│   ├── about/
+│   │   ├── page.tsx              # About + Our Departments + Our Story
+│   │   └── legal-resources/      # Foundation docs, EIN, handbook info
+│   ├── policy/
+│   │   ├── page.tsx              # Policy index (current + developing focus areas)
+│   │   └── [state]/page.tsx      # Per-state research and recommendations
+│   ├── join-us/
+│   │   ├── page.tsx              # Open roles directory + other ways to help
+│   │   └── [role]/page.tsx       # Individual role description + application form
+│   ├── writing/
+│   │   ├── page.tsx              # Article listing
+│   │   └── [slug]/page.tsx       # Individual article
+│   └── contact/page.tsx          # Contact form + crisis support
 │
 ├── components/
-│   ├── layout/             # Header, Footer, Navigation
-│   ├── ui/                 # Reusable primitives (Button, Card, SectionHeading)
-│   └── sections/           # Page-level sections (Hero, StatsBar, CTABanner, etc.)
+│   ├── layout/                   # Header, Footer, Navigation
+│   ├── ui/                       # Button, Card, SectionHeading
+│   └── sections/                 # Hero, StatsBar, CTABanner, CrisisSupport,
+│                                 # CrisisSupportPopup, NewsletterForm,
+│                                 # ContactForm, JoinUsForm, ArticleCard
 │
 ├── lib/
-│   ├── constants.ts        # Organization info, nav links, contact info
-│   └── types.ts            # Shared TypeScript interfaces
+│   ├── constants.ts              # Org name, nav, contact, social, donate URL
+│   └── types.ts                  # Shared TypeScript interfaces
 │
 └── data/
-    └── blog-posts.ts       # Blog post content (swap for a CMS later)
+    ├── articles.ts               # Article content (swap for a CMS later)
+    ├── states.ts                 # Per-state policy research content
+    └── roles.ts                  # Open positions: leadership, research, civic
 ```
 
 ### Key Architecture Decisions
 
-- **App Router** — File-based routing with nested layouts. Each page is a directory under `src/app/`.
-- **Server Components by default** — Pages and layout components render on the server. Only components that need interactivity (navigation, forms) are marked `"use client"`.
-- **Centralized constants** — All organization info (name, links, contact) lives in `src/lib/constants.ts`. Update once, reflected everywhere.
-- **Component layers** — Three levels of components:
-  - `ui/` — Generic, reusable primitives (Button, Card)
-  - `sections/` — Composed sections used in pages (Hero, CTABanner)
-  - `layout/` — Structural components (Header, Footer)
-- **Static blog data** — Blog posts are stored in `src/data/blog-posts.ts` as TypeScript objects. This makes it easy to swap in a CMS (Sanity, Contentful, etc.) later by changing only the data source.
+- **App Router** with file-based routing and nested layouts.
+- **Server Components by default**; only interactive components (navigation,
+  crisis popup, forms) are marked `"use client"`.
+- **Centralized constants** in `src/lib/constants.ts`: update the org name,
+  contact email, donate URL, or social links there once and they update everywhere.
+- **Three data files** (`articles.ts`, `states.ts`, `roles.ts`) act as a simple
+  CMS today and are easy to swap for a real CMS later.
+- **Dismissible crisis popup** lives in the root layout and uses `sessionStorage`
+  so it stays dismissed for the current visit only.
 
-## Pages
+## Customizing Content
 
-| Route             | Description                                    |
-|-------------------|------------------------------------------------|
-| `/`               | Home — hero, stats, featured posts, CTA        |
-| `/about`          | Mission, vision, story, team                   |
-| `/get-involved`   | Action cards, newsletter signup, CTA           |
-| `/contact`        | Contact form, org details, crisis resources    |
-| `/blog`           | Blog post listing                              |
-| `/blog/[slug]`    | Individual blog post                           |
+### Adding an article
 
-## Customization
+Add a new entry at the top of the `articles` array in `src/data/articles.ts`.
+Each article needs `slug`, `title`, `excerpt`, `date`, `author`, and `content`.
 
-### Colors
+### Adding or updating a role
 
-The color palette is defined in `src/app/globals.css` using Tailwind CSS v4's `@theme` syntax. The main palettes are:
+Edit `src/data/roles.ts`. Roles are grouped by `category`:
+`leadership`, `research-writing`, or `civic-affairs`.
 
-- `primary-*` — Greens (brand color)
-- `earth-*` — Warm earth tones
-- `accent` — Highlight green
+### Updating policy focus areas
 
-### Adding Blog Posts
+Edit `src/data/states.ts`. Each state has a `status` of either `active` (current
+research focus) or `developing` (future expansion).
 
-Add new entries to the `blogPosts` array in `src/data/blog-posts.ts`. Each post needs a unique `slug`, `title`, `excerpt`, `date`, `author`, and `content`.
+### Linking the Donate button
 
-### Adding Team Members
+Update `DONATE_URL` in `src/lib/constants.ts` once the fundraising platform
+link is ready.
 
-Team members are defined in `src/app/about/page.tsx`. Add new entries to the `teamMembers` array.
+## Wiring up forms
+
+The contact form, application form, and newsletter form are UI-only today.
+To wire them to real backends:
+
+- **Contact + applications:** integrate [Resend](https://resend.com/) (or
+  similar) and a Next.js Route Handler at `src/app/api/contact/route.ts`.
+- **Newsletter:** point the form at a hosted provider like
+  [Beehiiv](https://www.beehiiv.com/), Mailchimp, or Substack.
+
+## Colors
+
+The color palette is defined in `src/app/globals.css` using Tailwind CSS v4's
+`@theme` syntax. The main palettes are:
+
+- `ink-*` for deep charcoal grays (foreground / dark sections)
+- `gold-*` for brand gold accents
+- `cream-*` for warm light backgrounds

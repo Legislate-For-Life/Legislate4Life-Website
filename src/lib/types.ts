@@ -12,36 +12,46 @@ export interface Article {
   content: string;
 }
 
-export interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-}
-
 export interface StatItem {
   value: string;
   label: string;
 }
 
-export interface ActionCard {
+export interface PolicyRecommendation {
   title: string;
-  description: string;
-  href: string;
-  linkText: string;
-}
-
-export interface Legislation {
-  title: string;
-  billNumber?: string;
-  status: "Introduced" | "In Committee" | "Passed" | "Enacted" | "Proposed";
   summary: string;
 }
+
+export type StateStatus = "active" | "developing";
 
 export interface StatePolicyPage {
   slug: string;
   name: string;
   abbreviation: string;
+  status: StateStatus;
   summary: string;
+  focusAreas: string[];
   research: string[];
-  legislation: Legislation[];
+  recommendations: PolicyRecommendation[];
+}
+
+export type RoleCategory =
+  | "leadership"
+  | "research-writing"
+  | "civic-affairs";
+
+export type RoleType = "leadership" | "volunteer" | "internship";
+
+export interface Role {
+  slug: string;
+  title: string;
+  category: RoleCategory;
+  type: RoleType;
+  timeCommitment: string;
+  location: "Remote" | "In-person" | "Hybrid";
+  openings: number | "multiple";
+  requiresOnboardingAgreement: boolean;
+  summary: string;
+  responsibilities: string[];
+  qualifications: string[];
 }

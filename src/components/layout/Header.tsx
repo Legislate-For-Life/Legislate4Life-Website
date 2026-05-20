@@ -26,8 +26,11 @@ export default function Header() {
                 {ORG_NAME}
               </span>
               <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-gold-400/80">
-                Plant Awareness, Harvest Fairness
+                Policy Research &amp; Public Education
               </span>
+            </span>
+            <span className="sm:hidden text-sm font-semibold tracking-wider uppercase text-gold-300">
+              Legislative for Life
             </span>
           </Link>
           <Navigation />

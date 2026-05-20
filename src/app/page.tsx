@@ -30,20 +30,21 @@ export default function Home() {
                   Spotlight
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold leading-tight mb-3">
-                  Launching our state-by-state policy tracker
+                  We&apos;re hiring across multiple departments
                 </h2>
                 <p className="text-ink-200 leading-relaxed">
-                  We&apos;re rolling out research and proposed legislation for
-                  the first four states in our network. Follow the bills
-                  we&apos;re tracking and the findings shaping our advocacy.
+                  The foundation is actively expanding the Center for Public
+                  Policy, the Civic Affairs Division, and Strategy &amp;
+                  Communication. If you want to do real work on real issues,
+                  there&apos;s probably a role for you.
                 </p>
               </div>
               <div className="md:col-span-2 flex md:justify-end">
                 <Link
-                  href="/policy"
+                  href="/join-us"
                   className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
                 >
-                  Explore Policy
+                  See Open Roles
                   <svg
                     className="ml-2 w-4 h-4"
                     fill="none"
@@ -70,7 +71,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <SectionHeading
               title="Why This Matters"
-              subtitle="Farmers feed our nation, but too many are struggling in silence. Mental health challenges in agricultural communities are a crisis that demands action."
+              subtitle="Good policy starts with good information. We make that information clear, accessible, and useful to the people who shape decisions and the communities who live with them."
             />
           </div>
           <div className="grid gap-8 sm:grid-cols-3 text-left mt-4 max-w-5xl mx-auto">
@@ -80,22 +81,24 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Educate</h3>
+              <h3 className="font-semibold text-foreground mb-2">Public Education</h3>
               <p className="text-sm text-muted-foreground">
-                We raise awareness about the mental health challenges unique
-                to farming communities.
+                Plain-language explainers, articles, and resources that help
+                people understand how policy actually works, and how it affects
+                their lives.
               </p>
             </div>
             <div className="p-6 rounded-xl bg-white border border-ink-100">
               <div className="w-10 h-10 rounded-full bg-gold-500 text-ink-900 flex items-center justify-center mb-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Legislate</h3>
+              <h3 className="font-semibold text-foreground mb-2">Policy Research</h3>
               <p className="text-sm text-muted-foreground">
-                We push for policies that fund rural mental health services
-                and expand access to care.
+                Original research and analysis on the issues shaping public
+                life. We turn data and lived experience into practical
+                recommendations.
               </p>
             </div>
             <div className="p-6 rounded-xl bg-white border border-ink-100">
@@ -104,10 +107,11 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Support</h3>
+              <h3 className="font-semibold text-foreground mb-2">Community Engagement</h3>
               <p className="text-sm text-muted-foreground">
-                We connect farmers and their families with resources and a
-                community that cares.
+                Local projects, awareness campaigns, and outreach that bring
+                research home and help communities engage with the issues that
+                matter to them.
               </p>
             </div>
           </div>
@@ -142,9 +146,9 @@ export default function Home() {
       </section>
 
       <CTABanner
-        title="Together, We Can Make a Difference"
-        description="Join us in advocating for mental health resources and legislation that supports farming communities."
-        primaryAction={{ label: "Get Involved", href: "/get-involved" }}
+        title="Help us do this work."
+        description="We&rsquo;re recruiting students, researchers, writers, and advocates who want to make a difference in their communities. There&rsquo;s a place for you on the team."
+        primaryAction={{ label: "See Open Roles", href: "/join-us" }}
         secondaryAction={{ label: "Contact Us", href: "/contact" }}
       />
     </>

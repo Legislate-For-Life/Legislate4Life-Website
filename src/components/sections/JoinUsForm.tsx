@@ -3,7 +3,15 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 
-export default function JoinUsForm() {
+interface JoinUsFormProps {
+  roleTitle?: string;
+  roleSlug?: string;
+}
+
+export default function JoinUsForm({
+  roleTitle,
+  roleSlug,
+}: JoinUsFormProps = {}) {
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
@@ -26,8 +34,9 @@ export default function JoinUsForm() {
           Application Received
         </h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Thanks for wanting to join us. We&apos;ll review your information and
-          respond within <strong>1–2 business days</strong>.
+          Thanks for applying{roleTitle ? ` for ${roleTitle}` : ""}. We&apos;ll
+          review your application and respond within{" "}
+          <strong>1 to 2 business days</strong>.
         </p>
       </div>
     );
@@ -41,16 +50,18 @@ export default function JoinUsForm() {
       }}
       className="space-y-5"
     >
+      {roleSlug && <input type="hidden" name="role" value={roleSlug} />}
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
-            htmlFor="advocate-name"
+            htmlFor="applicant-name"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Full Name
           </label>
           <input
-            id="advocate-name"
+            id="applicant-name"
             name="name"
             type="text"
             required
@@ -60,13 +71,13 @@ export default function JoinUsForm() {
         </div>
         <div>
           <label
-            htmlFor="advocate-email"
+            htmlFor="applicant-email"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Email
           </label>
           <input
-            id="advocate-email"
+            id="applicant-email"
             name="email"
             type="email"
             required
@@ -75,39 +86,78 @@ export default function JoinUsForm() {
           />
         </div>
       </div>
-      <div>
-        <label
-          htmlFor="advocate-state"
-          className="block text-sm font-medium text-foreground mb-1"
-        >
-          State (optional)
-        </label>
-        <input
-          id="advocate-state"
-          name="state"
-          type="text"
-          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
-          placeholder="Where are you based?"
-        />
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label
+            htmlFor="applicant-phone"
+            className="block text-sm font-medium text-foreground mb-1"
+          >
+            Phone Number
+          </label>
+          <input
+            id="applicant-phone"
+            name="phone"
+            type="tel"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            placeholder="(555) 123-4567"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="applicant-resume"
+            className="block text-sm font-medium text-foreground mb-1"
+          >
+            Resume Link <span className="text-muted-foreground font-normal">(optional)</span>
+          </label>
+          <input
+            id="applicant-resume"
+            name="resume"
+            type="url"
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            placeholder="Google Drive, Dropbox, LinkedIn"
+          />
+        </div>
       </div>
+
       <div>
         <label
-          htmlFor="advocate-why"
+          htmlFor="applicant-experience"
           className="block text-sm font-medium text-foreground mb-1"
         >
-          Why do you want to advocate with us?
+          Relevant Experience
         </label>
         <textarea
-          id="advocate-why"
+          id="applicant-experience"
+          name="experience"
+          rows={4}
+          required
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y"
+          placeholder="Briefly describe the experience, coursework, projects, or skills that are relevant to this role. If you'd rather upload a resume, paste a link above and just note that here."
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="applicant-why"
+          className="block text-sm font-medium text-foreground mb-1"
+        >
+          Why do you want to join The Legislative for Life Foundation?
+        </label>
+        <textarea
+          id="applicant-why"
           name="why"
           rows={4}
           required
           className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y"
-          placeholder="Tell us a bit about your connection to farming, mental health, or policy work."
+          placeholder="Tell us what draws you to our work and what you hope to contribute."
         />
       </div>
+
       <p className="text-xs text-muted-foreground">
-        We respond within 1–2 business days.
+        We respond within 1 to 2 business days. Some leadership roles include a
+        signed onboarding agreement as part of getting started.
       </p>
       <Button type="submit">Submit Application</Button>
     </form>

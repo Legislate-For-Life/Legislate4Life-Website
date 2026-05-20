@@ -55,15 +55,15 @@ export default function CrisisSupport({ variant = "banner" }: CrisisSupportProps
               className="font-semibold text-gold-200 hover:text-gold-100 underline underline-offset-4"
             >
               {CRISIS_RESOURCES.lifeline.name}
-            </a>{" "}
-            — {CRISIS_RESOURCES.lifeline.contact}.{" "}
+            </a>
+            : {CRISIS_RESOURCES.lifeline.contact}.{" "}
             <a
               href="tel:18003276243"
               className="font-semibold text-gold-200 hover:text-gold-100 underline underline-offset-4"
             >
               {CRISIS_RESOURCES.farmAid.name}
-            </a>{" "}
-            — {CRISIS_RESOURCES.farmAid.contact}.
+            </a>
+            : {CRISIS_RESOURCES.farmAid.contact}.
           </p>
         </div>
       </div>

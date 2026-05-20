@@ -1,72 +1,66 @@
 import type { StatePolicyPage } from "@/lib/types";
 
-// Placeholder policy content. Replace with real research and bill details
-// as the team's state-by-state work develops.
+// Current and developing areas of policy research. Active states are
+// states the foundation is currently researching. Developing states are
+// future research expansion targets, not yet confirmed.
 export const states: StatePolicyPage[] = [
   {
-    slug: "iowa",
-    name: "Iowa",
-    abbreviation: "IA",
+    slug: "virginia",
+    name: "Virginia",
+    abbreviation: "VA",
+    status: "active",
     summary:
-      "Iowa is one of the nation's largest agricultural economies, with farming touching nearly every rural community. Mental health infrastructure has lagged behind that scale.",
-    research: [
-      "Over 85% of Iowa counties are federally designated Mental Health Professional Shortage Areas.",
-      "Iowa farmers report some of the highest rates of stress and burnout in the Midwest, driven by commodity price swings and generational debt.",
-      "Telehealth adoption has grown, but broadband access remains a barrier in many rural counties.",
+      "Virginia is one of our two current research focus areas. The Commonwealth's mix of dense urban regions, rural communities, and a sizable federal workforce makes it a particularly useful place to study how policy moves between research and lived experience.",
+    focusAreas: [
+      "Public mental health awareness and access",
+      "Civic engagement in mixed urban and rural communities",
+      "Public education on state-level policy issues",
     ],
-    legislation: [
+    research: [
+      "Virginia's mental health system has expanded in recent years, but research continues to show significant gaps in rural access and youth-focused services.",
+      "Civic engagement varies sharply across regions, suggesting different community-level approaches are needed for outreach and public education to be effective.",
+      "State policymakers and community leaders consistently cite the need for clearer, more accessible policy summaries on a wide range of issues.",
+    ],
+    recommendations: [
       {
-        title: "Iowa Rural Mental Health Access Act",
-        billNumber: "SF 1234 (placeholder)",
-        status: "Proposed",
+        title: "Expand plain-language policy education",
         summary:
-          "Would establish a dedicated state fund for rural mental health services, including farmer-specific counseling programs and 24/7 crisis response.",
+          "Public education resources that explain state policy in clear terms help communities understand what's happening, why it matters, and how to engage.",
       },
       {
-        title: "Agricultural Stress Assistance Expansion",
-        status: "In Committee",
+        title: "Strengthen rural awareness initiatives",
         summary:
-          "Would expand state matching funds for the Farm and Ranch Stress Assistance Network (FRSAN) and require mental health training for ag extension agents.",
-      },
-    ],
-  },
-  {
-    slug: "nebraska",
-    name: "Nebraska",
-    abbreviation: "NE",
-    summary:
-      "Nebraska's farming communities face unique pressures from prolonged droughts and shifting markets. State-level mental health support is limited.",
-    research: [
-      "More than half of Nebraska's 93 counties have no licensed psychiatrist.",
-      "Agricultural suicide rates in Nebraska outpace the national farm average, with ranching communities disproportionately affected.",
-      "Existing hotline programs report high demand but limited funding for sustained follow-up care.",
-    ],
-    legislation: [
-      {
-        title: "Nebraska Farm Family Mental Health Act",
-        status: "Proposed",
-        summary:
-          "Would fund rural mental health vouchers for farm families and create a statewide network of agricultural peer-support specialists.",
+          "Mental health and civic engagement awareness work tailored to rural Virginia would help close documented gaps in information and resource access.",
       },
     ],
   },
   {
-    slug: "kansas",
-    name: "Kansas",
-    abbreviation: "KS",
+    slug: "texas",
+    name: "Texas",
+    abbreviation: "TX",
+    status: "active",
     summary:
-      "Kansas combines major commodity farming with significant ranching operations. Mental health access varies widely between the eastern and western halves of the state.",
-    research: [
-      "Roughly 70% of Kansas farmers report moderate to severe work-related stress in recent surveys.",
-      "Rural hospital closures have reduced access to both physical and behavioral health care.",
-      "Ag extension services have begun piloting mental health first-aid training with promising early results.",
+      "Texas is our second current research focus area. The state's scale, demographic diversity, and the range of issues policymakers and communities are navigating make it a high-impact place for the foundation's research and public education work.",
+    focusAreas: [
+      "Mental health awareness in growing communities",
+      "Public education on state and local policy",
+      "Community-level engagement and outreach",
     ],
-    legislation: [
+    research: [
+      "Texas continues to experience some of the fastest population growth in the country, creating new pressure on public services and the need for clear public information.",
+      "Rural and exurban communities frequently report limited access to clear, trustworthy explanations of state and federal policy that affects them.",
+      "Researchers have repeatedly highlighted the value of community-based education programs as a complement to formal state communication.",
+    ],
+    recommendations: [
       {
-        title: "Kansas Rural Behavioral Health Investment",
-        status: "In Committee",
+        title: "Invest in community-level civic education",
         summary:
-          "Would direct state funds toward rural behavioral health infrastructure, with a dedicated line item for agricultural communities.",
+          "Local programs that help residents understand how state and federal policy actually works tend to drive higher engagement and better-informed decision-making.",
+      },
+      {
+        title: "Translate state policy into plain language",
+        summary:
+          "Accessible explainers on key policy issues help bridge the gap between formal policy documents and everyday public understanding.",
       },
     ],
   },
@@ -74,26 +68,48 @@ export const states: StatePolicyPage[] = [
     slug: "california",
     name: "California",
     abbreviation: "CA",
+    status: "developing",
     summary:
-      "California's agricultural workforce is the largest and most diverse in the country. Mental health needs span owners, family operations, and farmworkers.",
+      "California is a potential future research focus area. We're scoping the most useful contributions the foundation could make given the scale and complexity of state policy work already underway.",
+    focusAreas: [
+      "Initial scoping of priority research areas",
+      "Mapping existing public education infrastructure",
+    ],
     research: [
-      "Farmworker communities face high rates of stress, depression, and anxiety, often compounded by language and immigration barriers.",
-      "Heat, wildfire smoke, and climate-driven water insecurity add significant mental health strain across the Central Valley.",
-      "Culturally and linguistically appropriate mental health services remain underfunded relative to the scale of need.",
+      "Initial scoping in progress. We're identifying issue areas where the foundation's public education and research approach would add the most value.",
     ],
-    legislation: [
-      {
-        title: "California Farmworker Mental Health Access Act",
-        status: "Proposed",
-        summary:
-          "Would expand bilingual and bicultural mental health services in agricultural regions and fund community health worker programs.",
-      },
-      {
-        title: "Central Valley Behavioral Health Expansion",
-        status: "Introduced",
-        summary:
-          "Would direct state behavioral health dollars specifically to Central Valley agricultural counties with the greatest access gaps.",
-      },
+    recommendations: [],
+  },
+  {
+    slug: "maryland",
+    name: "Maryland",
+    abbreviation: "MD",
+    status: "developing",
+    summary:
+      "Maryland is a potential future research focus area. We're evaluating where the foundation's policy research and public education work could most usefully complement existing efforts.",
+    focusAreas: [
+      "Initial scoping of priority research areas",
+      "Identifying community-level engagement opportunities",
     ],
+    research: [
+      "Initial scoping in progress. We're identifying the policy areas where clear, accessible public education is most needed.",
+    ],
+    recommendations: [],
+  },
+  {
+    slug: "new-york",
+    name: "New York",
+    abbreviation: "NY",
+    status: "developing",
+    summary:
+      "New York is a potential future research focus area. The state's size and policy complexity present both opportunities and questions about where the foundation can add the most value.",
+    focusAreas: [
+      "Initial scoping of priority research areas",
+      "Public education on state policy",
+    ],
+    research: [
+      "Initial scoping in progress. We're working through where independent policy research and public education would be most useful for residents and policymakers.",
+    ],
+    recommendations: [],
   },
 ];

@@ -26,7 +26,7 @@ export default function NewsletterForm({
 
   const inputClass =
     variant === "dark"
-      ? "flex-1 px-4 py-2.5 rounded-lg bg-ink-800 border border-ink-700 text-ink-100 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent text-sm"
+      ? "min-w-0 flex-1 px-4 py-2 rounded-lg bg-ink-800 border border-ink-700 text-ink-100 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent text-sm"
       : "flex-1 px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent";
 
   return (

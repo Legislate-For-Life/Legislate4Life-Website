@@ -43,12 +43,7 @@ export default function Hero() {
             <Button href="/join-us" size="lg">
               Join Us
             </Button>
-            <Button
-              href="/about"
-              variant="outline"
-              size="lg"
-              className="border-gold-300 text-gold-200 hover:bg-gold-300/10"
-            >
+            <Button href="/about" variant="outline-gold" size="lg">
               About the Foundation
             </Button>
           </div>

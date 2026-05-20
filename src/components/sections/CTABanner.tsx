@@ -25,9 +25,8 @@ export default function CTABanner({
           {secondaryAction && (
             <Button
               href={secondaryAction.href}
-              variant="outline"
+              variant="outline-gold"
               size="lg"
-              className="border-gold-300 text-gold-200 hover:bg-gold-300/10"
             >
               {secondaryAction.label}
             </Button>

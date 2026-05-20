@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonVariant = "primary" | "secondary" | "outline" | "outline-gold";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -20,6 +20,9 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-ink-900 text-gold-200 hover:bg-ink-800 focus-visible:ring-ink-700",
   outline:
     "border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-gold-200 focus-visible:ring-ink-700",
+  // Outline variant for dark backgrounds: gold border + gold text, no conflicts.
+  "outline-gold":
+    "border-2 border-gold-300 text-gold-200 hover:bg-gold-300/10 focus-visible:ring-gold-400",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

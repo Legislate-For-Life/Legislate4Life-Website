@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink-900 text-ink-100 border-t border-gold-600/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-12">
           {/* Brand & tagline */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-3 mb-4">
@@ -59,12 +59,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick links: two columns */}
-          <div className="lg:col-span-3">
+          {/* Middle column: Quick links with newsletter beneath */}
+          <div className="lg:col-span-5">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
               Quick Links
             </h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 max-w-sm">
               <ul className="space-y-2">
                 {FOOTER_LINKS_COL_1.map((link) => (
                   <li key={link.href}>
@@ -84,7 +84,7 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
               <Link
                 href="/about/legal-resources"
                 className="text-xs uppercase tracking-widest text-gold-300 hover:text-gold-200 transition-colors"
@@ -92,28 +92,30 @@ export default function Footer() {
                 Legal &amp; Resources →
               </Link>
             </div>
+
+            {/* Newsletter, beneath the quick links area */}
+            <div className="mt-10 pt-8 border-t border-ink-700/60">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-3 text-gold-300">
+                Stay in the Loop
+              </h3>
+              <p className="text-sm text-ink-200 leading-relaxed mb-4 max-w-md">
+                Monthly updates on our research, writing, and the policy
+                conversations we&apos;re tracking.
+              </p>
+              <div className="max-w-md">
+                <NewsletterForm variant="dark" />
+              </div>
+            </div>
           </div>
 
-          {/* Newsletter */}
+          {/* Right column: Connect (email + social) */}
           <div className="lg:col-span-3">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
-              Stay in the Loop
-            </h3>
-            <p className="text-sm text-ink-200 leading-relaxed mb-4">
-              Monthly updates on our research, writing, and the policy
-              conversations we&apos;re tracking.
-            </p>
-            <NewsletterForm variant="dark" />
-          </div>
-
-          {/* Social + email */}
-          <div className="lg:col-span-2">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-4 text-gold-300">
               Connect
             </h3>
             <a
               href={`mailto:${CONTACT_INFO.email}`}
-              className="block text-sm text-ink-200 hover:text-gold-200 transition-colors break-all mb-4"
+              className="block text-sm text-ink-200 hover:text-gold-200 transition-colors break-words mb-5"
             >
               {CONTACT_INFO.email}
             </a>

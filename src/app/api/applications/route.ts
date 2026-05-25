@@ -1,0 +1,170 @@
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
+import { CONTACT_INFO, ORG_NAME } from "@/lib/constants";
+import { roles } from "@/data/roles";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const FROM_ADDRESS = `${ORG_NAME} <applications@legislateforlife.org>`;
+const TO_ADDRESS = CONTACT_INFO.email;
+
+interface ApplicationPayload {
+  name?: string;
+  email?: string;
+  phone?: string;
+  resume?: string;
+  experience?: string;
+  why?: string;
+  role?: string;
+  // Honeypot.
+  company?: string;
+}
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const URL_PATTERN = /^https?:\/\/[^\s]+$/i;
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export async function POST(request: Request) {
+  if (!process.env.RESEND_API_KEY) {
+    console.error("Application form: RESEND_API_KEY is not configured.");
+    return NextResponse.json(
+      { error: "Application service is not configured. Please email us directly." },
+      { status: 500 },
+    );
+  }
+
+  let body: ApplicationPayload;
+  try {
+    body = (await request.json()) as ApplicationPayload;
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    );
+  }
+
+  if (body.company && body.company.trim() !== "") {
+    return NextResponse.json({ ok: true });
+  }
+
+  const name = (body.name ?? "").trim();
+  const email = (body.email ?? "").trim();
+  const phone = (body.phone ?? "").trim();
+  const resume = (body.resume ?? "").trim();
+  const experience = (body.experience ?? "").trim();
+  const why = (body.why ?? "").trim();
+  const roleSlug = (body.role ?? "").trim();
+
+  if (!name || !email || !phone || !resume || !experience || !why) {
+    return NextResponse.json(
+      { error: "All fields are required." },
+      { status: 400 },
+    );
+  }
+
+  if (!EMAIL_PATTERN.test(email)) {
+    return NextResponse.json(
+      { error: "Please enter a valid email address." },
+      { status: 400 },
+    );
+  }
+
+  if (!URL_PATTERN.test(resume)) {
+    return NextResponse.json(
+      { error: "Please enter a valid resume link starting with http:// or https://." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    name.length > 200 ||
+    phone.length > 50 ||
+    resume.length > 1_000 ||
+    experience.length > 10_000 ||
+    why.length > 10_000
+  ) {
+    return NextResponse.json(
+      { error: "One of the fields is too long." },
+      { status: 400 },
+    );
+  }
+
+  const matchingRole = roles.find((r) => r.slug === roleSlug);
+  const roleTitle = matchingRole?.title ?? "Unspecified role";
+  const subjectRolePart = matchingRole?.title ?? "General";
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 680px; color:#111827;">
+      <h2 style="font-size: 18px; margin: 0 0 4px; font-weight: 700;">New application: ${escapeHtml(roleTitle)}</h2>
+      <p style="color:#6b7280; margin: 0 0 24px; font-size: 13px;">Submitted from legislateforlife.org/join-us.</p>
+      <table style="border-collapse: collapse; width: 100%; font-size: 14px;">
+        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; width:140px; vertical-align:top;">Role</td><td style="padding:8px 12px;">${escapeHtml(roleTitle)}${matchingRole ? ` <span style="color:#9ca3af; font-size: 12px;">(${escapeHtml(matchingRole.slug)})</span>` : ""}</td></tr>
+        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Name</td><td style="padding:8px 12px;">${escapeHtml(name)}</td></tr>
+        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Email</td><td style="padding:8px 12px;"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
+        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Phone</td><td style="padding:8px 12px;"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></td></tr>
+        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Resume</td><td style="padding:8px 12px;"><a href="${escapeHtml(resume)}" target="_blank" rel="noopener noreferrer">${escapeHtml(resume)}</a></td></tr>
+      </table>
+      <h3 style="font-size: 14px; margin: 24px 0 8px; font-weight: 600;">Relevant experience</h3>
+      <p style="white-space: pre-wrap; line-height: 1.55; font-size: 14px; margin: 0;">${escapeHtml(experience)}</p>
+      <h3 style="font-size: 14px; margin: 24px 0 8px; font-weight: 600;">Why they want to join</h3>
+      <p style="white-space: pre-wrap; line-height: 1.55; font-size: 14px; margin: 0;">${escapeHtml(why)}</p>
+      <hr style="border:none; border-top:1px solid #e5e7eb; margin: 28px 0 12px;">
+      <p style="color:#9ca3af; font-size: 12px; margin: 0;">Reply directly to this email to respond to ${escapeHtml(name)}.</p>
+    </div>
+  `.trim();
+
+  const text = `New application: ${roleTitle}
+
+Role:    ${roleTitle}${matchingRole ? ` (${matchingRole.slug})` : ""}
+Name:    ${name}
+Email:   ${email}
+Phone:   ${phone}
+Resume:  ${resume}
+
+Relevant experience:
+${experience}
+
+Why they want to join:
+${why}
+
+---
+Reply directly to this email to respond to ${name}.`;
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: TO_ADDRESS,
+      replyTo: email,
+      subject: `[Application: ${subjectRolePart}] ${name}`,
+      html,
+      text,
+    });
+
+    if (error) {
+      console.error("Application form Resend error:", error);
+      return NextResponse.json(
+        { error: "We couldn't submit your application. Please try again or email us directly." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("Application form unexpected error:", err);
+    return NextResponse.json(
+      { error: "We couldn't submit your application. Please try again or email us directly." },
+      { status: 500 },
+    );
+  }
+}

@@ -8,13 +8,65 @@ interface JoinUsFormProps {
   roleSlug?: string;
 }
 
+interface SubmitState {
+  status: "idle" | "submitting" | "success" | "error";
+  message?: string;
+}
+
 export default function JoinUsForm({
   roleTitle,
   roleSlug,
 }: JoinUsFormProps = {}) {
-  const [submitted, setSubmitted] = useState(false);
+  const [state, setState] = useState<SubmitState>({ status: "idle" });
 
-  if (submitted) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (state.status === "submitting") return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      phone: String(data.get("phone") ?? ""),
+      resume: String(data.get("resume") ?? ""),
+      experience: String(data.get("experience") ?? ""),
+      why: String(data.get("why") ?? ""),
+      role: String(data.get("role") ?? roleSlug ?? ""),
+      company: String(data.get("company") ?? ""),
+    };
+
+    setState({ status: "submitting" });
+
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const json = (await res.json().catch(() => ({}))) as { error?: string };
+        setState({
+          status: "error",
+          message:
+            json.error ??
+            "We couldn't submit your application. Please try again in a moment.",
+        });
+        return;
+      }
+
+      setState({ status: "success" });
+    } catch {
+      setState({
+        status: "error",
+        message:
+          "We couldn't reach the server. Check your connection and try again.",
+      });
+    }
+  }
+
+  if (state.status === "success") {
     return (
       <div className="text-center py-12 px-6 bg-cream-50 border border-gold-300 rounded-xl">
         <svg
@@ -42,15 +94,33 @@ export default function JoinUsForm({
     );
   }
 
+  const submitting = state.status === "submitting";
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-      }}
-      className="space-y-5"
-    >
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       {roleSlug && <input type="hidden" name="role" value={roleSlug} />}
+
+      {/* Honeypot field. Hidden from users; bots fill it in and get silently rejected. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-10000px",
+          top: "auto",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+        }}
+      >
+        <label htmlFor="applicant-company">Company</label>
+        <input
+          id="applicant-company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -65,7 +135,8 @@ export default function JoinUsForm({
             name="name"
             type="text"
             required
-            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            disabled={submitting}
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
             placeholder="Your full name"
           />
         </div>
@@ -81,7 +152,8 @@ export default function JoinUsForm({
             name="email"
             type="email"
             required
-            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            disabled={submitting}
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
             placeholder="you@example.com"
           />
         </div>
@@ -100,7 +172,8 @@ export default function JoinUsForm({
             name="phone"
             type="tel"
             required
-            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            disabled={submitting}
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
             placeholder="(555) 123-4567"
           />
         </div>
@@ -109,13 +182,15 @@ export default function JoinUsForm({
             htmlFor="applicant-resume"
             className="block text-sm font-medium text-foreground mb-1"
           >
-            Resume Link <span className="text-muted-foreground font-normal">(optional)</span>
+            Resume Link
           </label>
           <input
             id="applicant-resume"
             name="resume"
             type="url"
-            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent"
+            required
+            disabled={submitting}
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
             placeholder="Google Drive, Dropbox, LinkedIn"
           />
         </div>
@@ -133,8 +208,9 @@ export default function JoinUsForm({
           name="experience"
           rows={4}
           required
-          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y"
-          placeholder="Briefly describe the experience, coursework, projects, or skills that are relevant to this role. If you'd rather upload a resume, paste a link above and just note that here."
+          disabled={submitting}
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y disabled:opacity-60"
+          placeholder="Briefly describe the experience, coursework, projects, or skills that are relevant to this role."
         />
       </div>
 
@@ -150,7 +226,8 @@ export default function JoinUsForm({
           name="why"
           rows={4}
           required
-          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y"
+          disabled={submitting}
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y disabled:opacity-60"
           placeholder="Tell us what draws you to our work and what you hope to contribute."
         />
       </div>
@@ -159,7 +236,19 @@ export default function JoinUsForm({
         We respond within 1 to 2 business days. Some leadership roles include a
         signed onboarding agreement as part of getting started.
       </p>
-      <Button type="submit">Submit Application</Button>
+
+      {state.status === "error" && state.message && (
+        <p
+          role="alert"
+          className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3"
+        >
+          {state.message}
+        </p>
+      )}
+
+      <Button type="submit">
+        {submitting ? "Submitting..." : "Submit Application"}
+      </Button>
     </form>
   );
 }

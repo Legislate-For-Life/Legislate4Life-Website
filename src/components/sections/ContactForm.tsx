@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 
 interface SubmitState {
@@ -192,6 +193,17 @@ export default function ContactForm() {
           {state.message}
         </p>
       )}
+
+      <p className="text-xs text-muted-foreground">
+        By sending us a message, you agree to our{" "}
+        <Link
+          href="/privacy"
+          className="text-gold-700 hover:text-gold-800 underline underline-offset-2"
+        >
+          Privacy Policy
+        </Link>
+        .
+      </p>
 
       <Button type="submit" className="w-full sm:w-auto">
         {submitting ? "Sending..." : "Send Message"}

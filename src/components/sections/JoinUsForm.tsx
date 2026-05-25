@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 
 interface JoinUsFormProps {
@@ -234,7 +235,15 @@ export default function JoinUsForm({
 
       <p className="text-xs text-muted-foreground">
         We respond within 1 to 2 business days. Some leadership roles include a
-        signed onboarding agreement as part of getting started.
+        signed onboarding agreement as part of getting started. By submitting
+        your application, you agree to our{" "}
+        <Link
+          href="/privacy"
+          className="text-gold-700 hover:text-gold-800 underline underline-offset-2"
+        >
+          Privacy Policy
+        </Link>
+        .
       </p>
 
       {state.status === "error" && state.message && (

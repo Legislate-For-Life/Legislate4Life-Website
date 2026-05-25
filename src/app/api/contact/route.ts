@@ -32,12 +32,34 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// Email headers (Subject, From, etc.) treat CRLF as a separator, which makes
+// any user-controlled value going into a header a header-injection risk.
+// Strip CR/LF and other control chars, then collapse and cap length.
+function sanitizeHeaderValue(value: string): string {
+  return value
+    .replace(/[\r\n\t\v\f\0]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 200);
+}
+
 export async function POST(request: Request) {
   if (!process.env.RESEND_API_KEY) {
     console.error("Contact form: RESEND_API_KEY is not configured.");
     return NextResponse.json(
       { error: "Email service is not configured. Please email us directly." },
       { status: 500 },
+    );
+  }
+
+  // Reject anything that isn't JSON. Cross-origin <form> POSTs can't set
+  // application/json without a CORS preflight, so this preserves our
+  // implicit CSRF protection.
+  const contentType = request.headers.get("content-type") ?? "";
+  if (!contentType.toLowerCase().startsWith("application/json")) {
+    return NextResponse.json(
+      { error: "Unsupported content type." },
+      { status: 415 },
     );
   }
 
@@ -116,7 +138,7 @@ Reply directly to this email to respond to ${name}.`;
       from: FROM_ADDRESS,
       to: TO_ADDRESS,
       replyTo: email,
-      subject: `[Contact] ${subject}`,
+      subject: sanitizeHeaderValue(`[Contact] ${subject}`),
       html,
       text,
     });

@@ -84,12 +84,18 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col gap-1.5">
               <Link
                 href="/about/legal-resources"
                 className="text-xs uppercase tracking-widest text-gold-300 hover:text-gold-200 transition-colors"
               >
                 Legal &amp; Resources →
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-xs uppercase tracking-widest text-gold-300 hover:text-gold-200 transition-colors"
+              >
+                Privacy Policy →
               </Link>
             </div>
 
@@ -157,10 +163,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-ink-700 flex flex-col sm:flex-row justify-between gap-2 text-xs text-ink-300">
-          <p>
-            &copy; {new Date().getFullYear()} {ORG_NAME}. All rights reserved.
-          </p>
+        <div className="mt-10 pt-6 border-t border-ink-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-ink-300">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <p>
+              &copy; {new Date().getFullYear()} {ORG_NAME}. All rights reserved.
+            </p>
+            <Link
+              href="/privacy"
+              className="hover:text-gold-200 transition-colors"
+            >
+              Privacy
+            </Link>
+          </div>
           <p className="tracking-widest uppercase">
             Educating Policymakers. Empowering Communities.
           </p>

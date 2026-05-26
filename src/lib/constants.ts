@@ -7,6 +7,12 @@ export const ORG_TAGLINE = "Educating Policymakers. Empowering Communities.";
 export const ORG_DESCRIPTION =
   "The Legislative for Life Foundation is a nonprofit dedicated to public policy research, education, and civic engagement. We translate research and lived experience into practical recommendations that help policymakers and communities address the issues shaping life across America and beyond.";
 
+// Production site URL. Used for canonical links, sitemaps, and structured data.
+export const SITE_URL = "https://legislateforlife.org";
+
+// Default social preview image (relative to SITE_URL via metadataBase).
+export const DEFAULT_OG_IMAGE = "/images/logo.png";
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },

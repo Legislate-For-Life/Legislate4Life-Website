@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_INFO, ORG_NAME } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Legal & Resources",
   description:
-    "Organizational documents, governance information, and member resources for The Legislative for Life Foundation.",
-};
+    `Organizational documents, governance information, and member resources for ${ORG_NAME}.`,
+  path: "/about/legal-resources",
+});
 
 interface DocItem {
   title: string;

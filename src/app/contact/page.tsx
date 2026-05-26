@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/sections/ContactForm";
 import CrisisSupport from "@/components/sections/CrisisSupport";
 import { CONTACT_INFO, ORG_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description: `Get in touch with ${ORG_NAME}. We respond within 1 to 2 business days.`,
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

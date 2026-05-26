@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CrisisSupportPopup from "@/components/sections/CrisisSupportPopup";
-import { ORG_NAME, ORG_DESCRIPTION } from "@/lib/constants";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationSchema, rootMetadata, websiteSchema } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,13 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${ORG_NAME} | Policy Research & Public Education`,
-    template: `%s | ${ORG_NAME}`,
-  },
-  description: ORG_DESCRIPTION,
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -35,6 +30,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

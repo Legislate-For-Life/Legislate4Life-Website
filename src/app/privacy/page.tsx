@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_INFO, ORG_NAME } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
   description: `How ${ORG_NAME} collects, uses, and protects information from visitors and applicants.`,
-};
+  path: "/privacy",
+});
 
 const LAST_UPDATED = "May 25, 2026";
 
@@ -320,7 +322,7 @@ export default function PrivacyPage() {
               you have asked us to keep them on file.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-3">
-              <strong className="text-foreground">Server logs</strong> kept
+              <strong className="text-foreground">Server logs</strong>{" "} are kept
               by our hosting provider follow Vercel&apos;s retention policy
               (typically around 30 days for standard request logs).
             </p>

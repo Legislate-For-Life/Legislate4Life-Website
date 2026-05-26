@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { articles } from "@/data/articles";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  articleSchema,
+  breadcrumbSchema,
+  createPageMetadata,
+} from "@/lib/seo";
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -18,10 +24,14 @@ export async function generateMetadata({
   const post = articles.find((p) => p.slug === slug);
   if (!post) return { title: "Article Not Found" };
 
-  return {
+  return createPageMetadata({
     title: post.title,
     description: post.excerpt,
-  };
+    path: `/writing/${post.slug}`,
+    openGraphType: "article",
+    publishedTime: post.date,
+    authors: [post.author],
+  });
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -47,6 +57,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          articleSchema(post),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Writing", path: "/writing" },
+            { name: post.title, path: `/writing/${post.slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-ink-900 text-ink-100 py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link

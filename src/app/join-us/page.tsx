@@ -10,12 +10,14 @@ import {
 } from "@/data/roles";
 import type { Role } from "@/lib/types";
 import { DONATE_URL } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Join Us",
   description:
     "Apply to open positions at The Legislative for Life Foundation. We're actively recruiting students, researchers, writers, and advocates.",
-};
+  path: "/join-us",
+});
 
 const typeStyles: Record<Role["type"], string> = {
   leadership: "bg-gold-200 text-gold-900",

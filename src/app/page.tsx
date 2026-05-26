@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
@@ -6,6 +7,15 @@ import CrisisSupport from "@/components/sections/CrisisSupport";
 import ArticleCard from "@/components/sections/ArticleCard";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { articles } from "@/data/articles";
+import { ORG_DESCRIPTION, ORG_NAME } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: `${ORG_NAME} | Policy Research & Public Education`,
+  description: ORG_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function Home() {
   const featured = articles.slice(0, 3);

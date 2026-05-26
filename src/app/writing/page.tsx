@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArticleCard from "@/components/sections/ArticleCard";
 import { articles } from "@/data/articles";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Writing",
   description:
     "Articles, essays, and analysis from The Legislative for Life Foundation on the policy issues we research and the public education work we do.",
-};
+  path: "/writing",
+});
 
 export default function WritingPage() {
   return (

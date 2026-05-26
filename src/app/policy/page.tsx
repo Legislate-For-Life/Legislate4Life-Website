@@ -3,12 +3,14 @@ import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Card from "@/components/ui/Card";
 import { states } from "@/data/states";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Policy",
   description:
     "Policy research, public education, and practical recommendations from the Center for Public Policy at The Legislative for Life Foundation.",
-};
+  path: "/policy",
+});
 
 const statusStyles: Record<string, string> = {
   active: "bg-gold-200 text-gold-900",

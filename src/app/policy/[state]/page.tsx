@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { states } from "@/data/states";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  breadcrumbSchema,
+  createPageMetadata,
+  policyStateSchema,
+} from "@/lib/seo";
 
 interface StatePageProps {
   params: Promise<{ state: string }>;
@@ -17,10 +23,11 @@ export async function generateMetadata({
   const { state } = await params;
   const data = states.find((s) => s.slug === state);
   if (!data) return { title: "State Not Found" };
-  return {
+  return createPageMetadata({
     title: `${data.name} Policy Research`,
     description: data.summary,
-  };
+    path: `/policy/${data.slug}`,
+  });
 }
 
 const statusStyles: Record<string, string> = {
@@ -40,6 +47,16 @@ export default async function StatePage({ params }: StatePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          policyStateSchema(data),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Policy", path: "/policy" },
+            { name: data.name, path: `/policy/${data.slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-ink-900 text-ink-100 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link

@@ -1,9 +1,8 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/constants";
 import { roles } from "@/data/roles";
 import { states } from "@/data/states";
 import { articles } from "@/data/articles";
-
-const SITE_URL = "https://legislateforlife.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

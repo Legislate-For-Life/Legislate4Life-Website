@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { ORG_NAME } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
     "Learn about The Legislative for Life Foundation: our mission, how we operate, and the three divisions doing the work.",
-};
+  path: "/about",
+});
 
 interface Department {
   name: string;

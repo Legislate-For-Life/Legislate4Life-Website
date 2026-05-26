@@ -3,8 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import JoinUsForm from "@/components/sections/JoinUsForm";
+import JsonLd from "@/components/seo/JsonLd";
 import { roles, ROLE_CATEGORY_INFO } from "@/data/roles";
 import type { Role } from "@/lib/types";
+import {
+  breadcrumbSchema,
+  createPageMetadata,
+  jobPostingSchema,
+} from "@/lib/seo";
 
 interface RolePageProps {
   params: Promise<{ role: string }>;
@@ -20,10 +26,11 @@ export async function generateMetadata({
   const { role } = await params;
   const data = roles.find((r) => r.slug === role);
   if (!data) return { title: "Role Not Found" };
-  return {
+  return createPageMetadata({
     title: data.title,
     description: data.summary,
-  };
+    path: `/join-us/${data.slug}`,
+  });
 }
 
 const typeLabels: Record<Role["type"], string> = {
@@ -55,6 +62,16 @@ export default async function RolePage({ params }: RolePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          jobPostingSchema(data),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Join Us", path: "/join-us" },
+            { name: data.title, path: `/join-us/${data.slug}` },
+          ]),
+        ]}
+      />
       {/* Header */}
       <section className="bg-ink-900 text-ink-100 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

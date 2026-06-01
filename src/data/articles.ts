@@ -1,31 +1,61 @@
 import type { Article } from "@/lib/types";
 
 // Articles are ordered newest first. To publish a new article, add an entry
-// at the top of this array. When the two completed writing-team articles are
-// ready, replace the "writers-article-one" and "writers-article-two" entries
-// with the real title, excerpt, date, author, and content.
+// at the top of this array.
 export const articles: Article[] = [
   {
-    slug: "writers-article-one",
-    title: "[Writing Team Article 1] Title Goes Here",
+    slug: "the-harvest-nobody-talks-about",
+    title: "The Harvest Nobody Talks About",
     excerpt:
-      "Short summary of the article goes here. Once the writing team finalizes this piece, replace this excerpt with the real one.",
-    date: "2026-05-01",
+      "Farmers are 3.5 times more likely to die by suicide than the general population. This piece examines the pressures rural agricultural workers face and why asking for help remains so difficult.",
+    date: "2026-05-22",
     author: "Writing Team",
-    content: `This is a placeholder for the first writing team article. Replace the slug, title, excerpt, date, author, and this body content in src/data/articles.ts once the real article is ready to publish.
+    content: `Every time you sit down to have a meal, do you ever think about the one person, on one farm, miles and miles away from where you are, waking up before daybreak to make that meal possible? Farmers are the quiet backbone of civilizations all across the world. But right now, far too many of them are going unnoticed, and perhaps unsurprisingly, falling apart.
 
-## Section heading example
+The mental health crisis in rural America is no groundbreaking news story, but it is one that continually gets buried under the relentless floods of glamorous headlines and popular culture. Studies show that farmers are 3.5 times more likely to die by suicide compared to the general population (Farmer Mental Health Resilience Program, Rural Minds, n.d.). Think about that. Those who inherit their families' lands, those who pour their entire lives and identities into coaxing life out of ordinary soil are the ones silently slipping away. As a culture, it is important that we not only acknowledge their daily efforts in our produce, but also the psychological struggles they face on a daily basis.
 
-Body paragraph example. Two newlines create a new paragraph. Markdown-style **bold** is supported inline.`,
+The pressures they face are ceaseless and, in fact, cruel in how they compound. Unpredictable commodity markets fluctuating unstoppably. Catastrophic weather events arriving without warning, ravaging weeks to months of farmers' labour. The particular, suffocating dread of potentially being the generation that loses a farm your great-grandparents homesteaded. And on top of all of it, close to zero, if not zero access to mental health consultancies within a reasonable distance. Further, farmers struggle to connect with providers who understand their way of life (Payne, 2025), which means even the farmers brave enough to reach out often find a door that doesn't quite open for them.
+
+Because there is an additional tragedy to the plight of farmers: asking for help in the first place is its own impossible mountain to climb. In tight-knit rural communities, privacy as a concept does not exist the way it does in even bustling urban cities. Farmers are made to assume that reaching out for support is a weakness (Payne, 2025). This central belief is costing lives with devastating efficiency.
+
+So what actually moves the needle to eradicating or mitigating these tragedies? What can we do besides promoting farmers' access to hotlines? The answer, frustratingly simple but seemingly difficult, is people showing up for each other. As one rural mental health director put it, in regards to reaching out to these silently suffering farmers: "If you're wrong and they're actually fine, then you're a little bit embarrassed. If you're right, you might have saved a life" (Payne, 2025).
+
+We owe farmers more than a grateful social media post on harvest season. We owe them a culture that lets them speak up about their feelings, no matter how troubling, without it feeling as if they have failed someone. The good news (and luckily there is some) is that our culture is already shifting, slowly, stubbornly, the way all good crops tend to grow. The harvest nobody talks about is the one happening inside farmhouses across this nation. We're all long overdue to start listening a little more closely to the innerworkings of each of them.
+
+## Works Cited
+
+Farmer Mental Health Resilience Program, Rural Minds. (n.d.). Rural Minds. https://www.ruralminds.org/farmerresilience
+
+Payne, E. (2025, February 14). We're ignoring a major public health crisis: farmer mental health. Food Tank. https://foodtank.com/news/2025/02/were-ignoring-a-major-public-health-crisis-farmer-mental-health/`,
   },
   {
-    slug: "writers-article-two",
-    title: "[Writing Team Article 2] Title Goes Here",
+    slug: "a-look-into-tragedy-indias-suicide-fields",
+    title: "A Look into Tragedy: India's Suicide Fields",
     excerpt:
-      "Short summary of the second article goes here. Replace this with the real excerpt before publishing.",
-    date: "2026-04-15",
+      "More than 300,000 farmers in India have died by suicide since 1995. This article examines the crisis in Vidarbha, the exploitation that drives it, and the public silence that allows it to continue.",
+    date: "2026-04-11",
     author: "Writing Team",
-    content: `This is a placeholder for the second writing team article. Replace the metadata and content in src/data/articles.ts once the real article is ready.`,
+    content: `About 10% to 12% of the global population is estimated to have a job in the agricultural sector. Roughly 50% of those laborers suffer from some form of mental health issue and are 3.5 times more likely to die by suicide compared to the rest of the population. These statistics represent a zoomed-out dataset, so the numbers might not seem significant yet. However, when I share that more than 300,000 farmers have died by suicide since 1995 in India alone, the case becomes undeniably severe.
+
+There is a region in India known as Vidarbha. Despite being recognized as a "mineral hub," it is, unfortunately, highly underdeveloped. Many families there are involved in the farming business, which is a dreadful tale of its own. Given the number of farmer suicides recorded, the area is better off being named a "suicide hub." Ashok Saatpaise, a hardworking farmer based in that region, succumbed to intense pressure and stress, deeming it right to leave this world to cure his pain. He left behind his devoted wife, Sangeeta who was suddenly forced to become the breadwinner of the family and his two sons. His background reflects the immense suffering that not only he, but other farmers in the region face daily: water scarcity, a lack of proper hospitals, mounting debts, and a dangerous cycle of despair that has resulted in hundreds of deaths. Yet, these tragic deaths are not even the shocking part, nor are they the main component of this article. The true tragedy is the absolute ignorance and ingratitude of the general public, the media, and government officials.
+
+Farmers are easy targets. Naive and vulnerable, they are preyed upon by local banks, predatory moneylenders, corrupt bureaucrats, and land sharks. They are exploited, blackmailed, and manipulated until they are sucked dry and left with nothing. It is a vicious cycle; crushed by the immense burden of feeling worthless, they ultimately turn to giving up on life. The aftermath that follows is an ugly truth. Widows are left not only with the pain of losing their significant others, but also with the massive responsibility of facing societal stigmas, acting as the primary money earners, and striving to provide the best for their children. In places like Vidarbha, where suicide statistics remain chillingly consistent, women must walk three kilometers just to fetch water, and using a clean toilet is a comfort their families cannot afford. The ugliest truth of all is that the scammers and corrupt predators who prey on these vulnerable laborers comfortably eat the food grown in the very fields of their victims. They eat with dirty hands and no remorse whatsoever, while widows are forced to eat plain lentils for two months straight due to severe money shortages.
+
+Governments are incredibly well-equipped to establish welfare measures and schemes to prevent such deaths. Yet, even though they have established nominal protectionist measures for laborers in the agricultural sector, the numbers paint a completely different picture as casualties increase day by day. In fact, acts like the Landlord Act in India were manipulated or abolished, leaving farmers stripped of their land without a single penny of compensation, throwing them and their families onto the streets to suffer. What is even more laughable is that the same high-ranking officials involved in robbing farmers of their assets are the very ones who visit these impoverished villages, offering hollow promises of aiding them and solving issues that originated from their own corrupt doings.
+
+What is truly devastating is that despite being failed by the justice system and falling into the jaws of vicious, inhumane predators and despite the stories of these unfortunate incidents making the headlines, people still do not care. It is our collective ignorance that has allowed this wound to fester and grow. We simply move on with our lives while they cry and plead for a saving grace. Everyone has their own problems, but millions of farmers suffering from the exact same systemic pain? That demands a remedy. If we simply extend a hand to them, we can boost their confidence and help echo their voices globally. All they require is for someone to be on their side and take a stand with them. In the end, we are all human. As many textbooks note, "Humans are social animals." We, of all creatures, need people in our lives and so do our farmers.
+
+## Sources Used
+
+Saju S, Reddy SK, Bijjal S, Annapally SR. Farmer's mental health and well-being: Qualitative findings on protective factors. J Neurosci Rural Pract. 2024;15:307-12. doi: 10.25259/JNRP_403_2023
+
+South Dakota Suicide Prevention Center. "Farmers and Ranchers: Risk Factors and Population Statistics." SD Suicide Prevention. https://www.sdsuicideprevention.org/risks/populations/farmers-and-ranchers
+
+Al Jazeera. (2016). "Stories of survival: Widows of India's farmer suicides." Al Jazeera English. https://www.aljazeera.com/gallery/2016/11/3/stories-of-survival-widows-of-indias-farmer-suicides
+
+Times of India. (2022). "Farmers' suicide and the politics of freebies." The Times of India Readers' Blog. https://timesofindia.indiatimes.com/readersblog/my-voices/farmers-suicide-and-politics-of-freebies-1355/
+
+Quora Regional Analysis. "Why has Vidarbha lagged behind Mumbai and Pune in development despite having similar resources available?" Quora Development Forum. https://www.quora.com/Why-has-Vidarbha-lagged-behind-Mumbai-and-Pune-in-development-despite-having-similar-resources-available`,
   },
   {
     slug: "why-public-policy-education-matters",

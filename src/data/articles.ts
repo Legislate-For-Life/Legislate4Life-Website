@@ -29,6 +29,35 @@ Farmer Mental Health Resilience Program, Rural Minds. (n.d.). Rural Minds. https
 Payne, E. (2025, February 14). We're ignoring a major public health crisis: farmer mental health. Food Tank. https://foodtank.com/news/2025/02/were-ignoring-a-major-public-health-crisis-farmer-mental-health/`,
   },
   {
+    slug: "the-bitter-irony-of-harvest",
+    title: "The Bitter Irony of Harvest",
+    excerpt:
+      "The people who ensure our leaders never go hungry are often excluded from the basic protections they deserve. This piece examines debt, exploitation, and what must change.",
+    date: "2026-04-17",
+    author: "Writing Team",
+    content: `Agriculture is often romanticized to be the backbone of our economy and that also includes each and every household. The food is so easily slid into our plates that we forget there is a story behind every meal. The rice we eat represents months of fighting pests, managing irrigation and torturous labor under a boiling sun to reach our plates. We easily forget what we ate yesterday so why would we waste our time acknowledging the blood, sweat and tears put into that one single meal right?
+
+There is a bitter irony here that the very people who ensure our leaders never go hungry are themselves excluded from the basic protection rights they deserve. They shouldn't have to fight for the right to be protected by the law. It is a worldwide shame that the very people who feed the nations are forced to beg for a safety net, a duty that should be as obvious as the need for harvest itself.
+
+The cracks in this backbone have been appearing for a long time, underestimated and ignored. The numerous diseases born from the daily use of chemicals with little to no protective gear often show their face when it is already too late. Combined with muscle cramps and exhaustion, farmers grow weaker and weaker while their burdens grow.
+
+Simply to survive, they take huge loans to buy seeds, fertilizers and fuel. When the crops fail to cover the debts, they fall into a vicious cycle of borrowing to pay debts while piling up new ones. Farmers are vulnerable to industrial exploitation and scams, often leaving them with negative income while they provide quality food to the market only to be left with scraps. Add the unpredictability of the climate and all the pressure becomes a huge psychological weight that leads them to heartbreaking, irreversible decisions.
+
+## What needs to change
+
+The solution is changes, of course. There needs to be fundamentals shifts:
+
+**Healthcare as a right:** For all the hard work they go through, they deserve free monthly checkups and care regarding chemical use so they don't spend the later years suffering from preventable pain.
+
+**Subsidies:** Although subsidies are provided by the government. They should not be handed out to industrial companies, rather a direct subsidy to the farmers instead making sure farmers avoid falling into debt traps and achieve a decent quality of living.
+
+**Legal Protections:** Serious protection rights are an absolute must to ensure farmers aren't ripped by vicious industries or stuck in court for years over innocent mistakes.
+
+While countries like the US make use of protectionist measures by imposing import taxes on goods flowing into the country and subsidising particular products, it can backfire easily leading to trade wars that leave farmers to face massive losses when export demand drops. Moreover, farmers are stuck in a rat race, the only. Is progress when we can find mangoes in the cold winters? Agriculture is a work of time and extreme patience, health should not be traded for speed.
+
+We must protect our farmers, they are literally our lifeline. We must speak against the struggles our farmers are and have been facing. We must not wait until it is too late.`,
+  },
+  {
     slug: "a-look-into-tragedy-indias-suicide-fields",
     title: "A Look into Tragedy: India's Suicide Fields",
     excerpt:

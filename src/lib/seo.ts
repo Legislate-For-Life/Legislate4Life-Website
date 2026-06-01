@@ -183,7 +183,14 @@ export function breadcrumbSchema(
   };
 }
 
-export function articleSchema(article: Article) {
+export function articleSchema(
+  article: Article,
+  options?: { path?: string },
+) {
+  const url = options?.path
+    ? `${SITE_URL}${options.path.startsWith("/") ? options.path : `/${options.path}`}`
+    : `${SITE_URL}/writing/${article.slug}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -200,9 +207,9 @@ export function articleSchema(article: Article) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE_URL}/writing/${article.slug}`,
+      "@id": url,
     },
-    url: `${SITE_URL}/writing/${article.slug}`,
+    url,
     inLanguage: "en-US",
   };
 }

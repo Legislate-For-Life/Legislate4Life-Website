@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { states } from "@/data/states";
+import { getBriefsForState } from "@/data/policy-briefs";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   breadcrumbSchema,
@@ -44,6 +45,8 @@ export default async function StatePage({ params }: StatePageProps) {
   const { state } = await params;
   const data = states.find((s) => s.slug === state);
   if (!data) notFound();
+
+  const briefs = getBriefsForState(data.slug);
 
   return (
     <>
@@ -94,6 +97,54 @@ export default async function StatePage({ params }: StatePageProps) {
           </p>
         </div>
       </section>
+
+      {briefs.length > 0 && (
+        <section className="py-16 bg-cream-50 border-b border-ink-100">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Policy Briefs
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Full policy briefs from the Center for Public Policy on issues
+              affecting {data.name}.
+            </p>
+            <ul className="space-y-4">
+              {briefs.map((brief) => {
+                const formattedDate = new Date(brief.date).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  },
+                );
+
+                return (
+                  <li key={brief.slug}>
+                    <Link
+                      href={`/policy/${data.slug}/${brief.slug}`}
+                      className="group block p-6 rounded-xl bg-white border border-ink-100 hover:border-gold-400 hover:shadow-sm transition-all"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-600 mb-2">
+                        Policy Brief
+                      </p>
+                      <h3 className="text-lg font-semibold text-foreground group-hover:text-gold-700 transition-colors leading-snug">
+                        {brief.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                        {brief.excerpt}
+                      </p>
+                      <p className="mt-3 text-xs text-muted-foreground uppercase tracking-widest">
+                        {formattedDate} &middot; {brief.author}
+                      </p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* Focus areas */}
       <section className="py-16 bg-white">

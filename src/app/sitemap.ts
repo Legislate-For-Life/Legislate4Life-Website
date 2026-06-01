@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/constants";
 import { roles } from "@/data/roles";
 import { states } from "@/data/states";
 import { articles } from "@/data/articles";
+import { policyBriefs } from "@/data/policy-briefs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -79,5 +80,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPaths, ...rolePaths, ...statePaths, ...articlePaths];
+  const policyBriefPaths: MetadataRoute.Sitemap = policyBriefs.map(
+    (brief) => ({
+      url: `${SITE_URL}/policy/${brief.stateSlug}/${brief.slug}`,
+      lastModified: new Date(brief.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.75,
+    }),
+  );
+
+  return [
+    ...staticPaths,
+    ...rolePaths,
+    ...statePaths,
+    ...articlePaths,
+    ...policyBriefPaths,
+  ];
 }

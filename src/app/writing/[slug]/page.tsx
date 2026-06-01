@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { articles } from "@/data/articles";
+import RichTextBody from "@/components/sections/RichTextBody";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   articleSchema,
@@ -53,8 +54,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     day: "numeric",
   });
 
-  const paragraphs = post.content.split("\n\n");
-
   return (
     <>
       <JsonLd
@@ -101,48 +100,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       <article className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            {paragraphs.map((paragraph, index) => {
-              if (paragraph.startsWith("## ")) {
-                return (
-                  <h2
-                    key={index}
-                    className="text-2xl font-bold text-foreground mt-10 mb-4"
-                  >
-                    {paragraph.replace("## ", "")}
-                  </h2>
-                );
-              }
-              if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                return (
-                  <p
-                    key={index}
-                    className="font-semibold text-foreground leading-relaxed mb-4"
-                  >
-                    {paragraph.replace(/\*\*/g, "")}
-                  </p>
-                );
-              }
-              const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
-              return (
-                <p
-                  key={index}
-                  className="text-muted-foreground leading-relaxed mb-4"
-                >
-                  {parts.map((part, i) => {
-                    if (part.startsWith("**") && part.endsWith("**")) {
-                      return (
-                        <strong key={i} className="text-foreground">
-                          {part.replace(/\*\*/g, "")}
-                        </strong>
-                      );
-                    }
-                    return part;
-                  })}
-                </p>
-              );
-            })}
-          </div>
+          <RichTextBody content={post.content} />
 
           <hr className="my-12 border-ink-200" />
 

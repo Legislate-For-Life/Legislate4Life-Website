@@ -22,6 +22,16 @@ export interface PolicyRecommendation {
   summary: string;
 }
 
+export interface PolicyBrief {
+  slug: string;
+  stateSlug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  content: string;
+}
+
 export type StateStatus = "active" | "developing";
 
 export interface StatePolicyPage {

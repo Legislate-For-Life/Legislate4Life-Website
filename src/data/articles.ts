@@ -53,7 +53,7 @@ The solution is changes, of course. There needs to be fundamentals shifts:
 
 **Legal Protections:** Serious protection rights are an absolute must to ensure farmers aren't ripped by vicious industries or stuck in court for years over innocent mistakes.
 
-While countries like the US make use of protectionist measures by imposing import taxes on goods flowing into the country and subsidising particular products, it can backfire easily leading to trade wars that leave farmers to face massive losses when export demand drops. Moreover, farmers are stuck in a rat race, the only. Is progress when we can find mangoes in the cold winters? Agriculture is a work of time and extreme patience, health should not be traded for speed.
+While countries like the US make use of protectionist measures by imposing import taxes on goods flowing into the country and subsidising particular products, it can backfire easily leading to trade wars that leave farmers to face massive losses when export demand drops. Moreover, farmers are stuck in a rat race where finding mangoes in the dead of winter is mistaken for progress. Agriculture is a work of time and extreme patience; health should not be traded for speed.
 
 We must protect our farmers, they are literally our lifeline. We must speak against the struggles our farmers are and have been facing. We must not wait until it is too late.`,
   },

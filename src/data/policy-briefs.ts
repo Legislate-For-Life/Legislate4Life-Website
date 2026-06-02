@@ -13,6 +13,7 @@ export const policyBriefs: PolicyBrief[] = [
     date: "2026-06-01",
     author: ORG_NAME,
     content: virginiaFarmWellnessResilienceContent,
+    pdfFile: "virginia-farm-wellness-resilience.pdf",
   },
 ];
 

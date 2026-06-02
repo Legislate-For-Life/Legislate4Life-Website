@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import RichTextBody from "@/components/sections/RichTextBody";
+import PolicyBriefPdfViewer from "@/components/sections/PolicyBriefPdfViewer";
 import JsonLd from "@/components/seo/JsonLd";
 import { getPolicyBrief, policyBriefs } from "@/data/policy-briefs";
 import { states } from "@/data/states";
@@ -54,6 +55,10 @@ export default async function PolicyBriefPage({ params }: PolicyBriefPageProps) 
     day: "numeric",
   });
 
+  const pdfUrl = briefData.pdfFile
+    ? `/policy-briefs/${briefData.pdfFile}`
+    : null;
+
   return (
     <>
       <JsonLd
@@ -81,7 +86,7 @@ export default async function PolicyBriefPage({ params }: PolicyBriefPageProps) 
         ]}
       />
       <section className="bg-ink-900 text-ink-100 py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href={`/policy/${stateData.slug}`}
             className="inline-flex items-center text-sm text-gold-300 hover:text-gold-200 transition-colors mb-6"
@@ -115,8 +120,21 @@ export default async function PolicyBriefPage({ params }: PolicyBriefPageProps) 
         </div>
       </section>
 
+      {pdfUrl && (
+        <PolicyBriefPdfViewer
+          pdfUrl={pdfUrl}
+          title={briefData.title}
+          downloadFileName={briefData.pdfFile!}
+        />
+      )}
+
       <article className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {pdfUrl && (
+            <h2 className="text-2xl font-bold text-foreground mb-6">
+              Read on this page
+            </h2>
+          )}
           <RichTextBody content={briefData.content} />
 
           <div className="mt-12 flex justify-center">

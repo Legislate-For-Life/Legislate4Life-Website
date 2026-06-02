@@ -30,6 +30,8 @@ export interface PolicyBrief {
   date: string;
   author: string;
   content: string;
+  /** PDF filename under /public/policy-briefs/ (e.g. "virginia-farm-wellness-resilience.pdf"). */
+  pdfFile?: string;
 }
 
 export type StateStatus = "active" | "developing";

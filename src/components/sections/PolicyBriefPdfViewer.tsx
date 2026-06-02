@@ -11,7 +11,7 @@ export default function PolicyBriefPdfViewer({
 }: PolicyBriefPdfViewerProps) {
   return (
     <section aria-label="Policy brief PDF" className="py-10 bg-cream-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
           <p className="text-sm text-muted-foreground">
             View the full policy brief below or download a copy.

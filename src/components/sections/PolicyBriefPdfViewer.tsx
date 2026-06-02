@@ -10,8 +10,8 @@ export default function PolicyBriefPdfViewer({
   downloadFileName,
 }: PolicyBriefPdfViewerProps) {
   return (
-    <section aria-label="Policy brief PDF" className="py-8 lg:py-10 bg-cream-50">
-      <div className="max-w-[96rem] mx-auto px-3 sm:px-5 lg:px-6">
+    <section aria-label="Policy brief PDF" className="py-10 bg-cream-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
           <p className="text-sm text-muted-foreground">
             View the full policy brief below or download a copy.
@@ -54,12 +54,12 @@ export default function PolicyBriefPdfViewer({
             data={`${pdfUrl}#view=FitH`}
             type="application/pdf"
             aria-label={`PDF: ${title}`}
-            className="block w-full min-h-[88vh] lg:min-h-[92vh] bg-ink-100"
+            className="block w-full min-h-[140vh] sm:min-h-[160vh] lg:min-h-[200vh] bg-ink-100"
           >
             <iframe
               src={`${pdfUrl}#view=FitH`}
               title={`PDF: ${title}`}
-              className="w-full min-h-[88vh] lg:min-h-[92vh] bg-ink-100"
+              className="w-full min-h-[140vh] sm:min-h-[160vh] lg:min-h-[200vh] bg-ink-100"
             />
           </object>
         </div>

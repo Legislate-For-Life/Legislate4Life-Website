@@ -50,11 +50,18 @@ export default function PolicyBriefPdfViewer({
         </div>
 
         <div className="rounded-xl border border-ink-200 bg-white shadow-sm overflow-hidden">
-          <iframe
-            src={`${pdfUrl}#view=FitH`}
-            title={`PDF: ${title}`}
-            className="w-full min-h-[75vh] sm:min-h-[80vh] bg-ink-100"
-          />
+          <object
+            data={`${pdfUrl}#view=FitH`}
+            type="application/pdf"
+            aria-label={`PDF: ${title}`}
+            className="block w-full min-h-[75vh] sm:min-h-[80vh] bg-ink-100"
+          >
+            <iframe
+              src={`${pdfUrl}#view=FitH`}
+              title={`PDF: ${title}`}
+              className="w-full min-h-[75vh] sm:min-h-[80vh] bg-ink-100"
+            />
+          </object>
         </div>
         <p className="mt-3 text-xs text-muted-foreground">
           If the viewer does not load on your device, use Download PDF or Open

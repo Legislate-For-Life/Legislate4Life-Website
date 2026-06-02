@@ -5,9 +5,8 @@ import path from "path";
 // Notes:
 //  - HSTS uses a 2-year max-age + preload, which is the de-facto standard
 //    for sites operating only over HTTPS. Vercel terminates TLS for us.
-//  - X-Frame-Options blocks the entire site from being framed, since we
-//    have no embed use case. If we ever need iframe embedding, swap to a
-//    CSP frame-ancestors rule instead.
+//  - X-Frame-Options DENY on HTML routes blocks clickjacking. Policy brief
+//    PDFs under /policy-briefs/ use SAMEORIGIN so our pages can embed them.
 //  - Permissions-Policy denies sensors / payment / fullscreen we never
 //    use, reducing attack surface if a third-party script is ever added.
 //  - Content-Security-Policy is intentionally NOT set here yet. Our setup
@@ -51,6 +50,15 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        source: "/policy-briefs/:path*",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+        ],
       },
     ];
   },

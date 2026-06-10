@@ -64,6 +64,7 @@ export default function JoinUsPage() {
   const categoryOrder: Role["category"][] = [
     "leadership",
     "research-writing",
+    "communications",
     "civic-affairs",
   ];
 

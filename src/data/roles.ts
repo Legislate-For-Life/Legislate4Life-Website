@@ -206,6 +206,32 @@ export const roles: Role[] = [
     ],
   },
 
+  // ───── Strategy & Communication ─────
+  {
+    slug: "social-media-team-member",
+    title: "Social Media Team Member",
+    category: "communications",
+    type: "volunteer",
+    timeCommitment: "3 to 5 hours / week",
+    location: "Remote",
+    openings: "multiple",
+    requiresOnboardingAgreement: false,
+    summary:
+      "Help grow the foundation's public education reach through social content that explains our research, programs, and civic engagement work in clear, engaging formats.",
+    responsibilities: [
+      "Create and publish 1 to 2 pieces of social content per week (posts, short videos, carousels, or similar)",
+      "Turn foundation articles, policy briefs, and program updates into platform-ready content",
+      "Collaborate with the Strategy & Communication Department on messaging and editorial standards",
+      "Track basic engagement and share what is resonating with the team",
+    ],
+    qualifications: [
+      "Comfort creating content for at least one major social platform",
+      "Willing to appear on camera when the content calls for it (talking-head clips, event coverage, or similar)",
+      "Reliable with weekly deadlines and open to feedback",
+      "Interest in public education, civic engagement, or nonprofit communications",
+    ],
+  },
+
   // ───── Civic Affairs / Community ─────
   {
     slug: "civic-affairs-team-member",
@@ -270,6 +296,11 @@ export const ROLE_CATEGORY_INFO: Record<
     title: "Research & Writing",
     description:
       "Research and writing roles that power the Center for Public Policy and our public education work.",
+  },
+  communications: {
+    title: "Strategy & Communication",
+    description:
+      "Content and communications roles that help more people find and understand the foundation's work.",
   },
   "civic-affairs": {
     title: "Civic Affairs & Community",

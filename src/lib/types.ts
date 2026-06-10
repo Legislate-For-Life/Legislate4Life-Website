@@ -50,6 +50,7 @@ export interface StatePolicyPage {
 export type RoleCategory =
   | "leadership"
   | "research-writing"
+  | "communications"
   | "civic-affairs";
 
 export type RoleType = "leadership" | "volunteer" | "internship";

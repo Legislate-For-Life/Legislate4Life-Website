@@ -34,6 +34,8 @@ export interface PolicyBrief {
   pdfFile?: string;
 }
 
+export type PolicyBriefMeta = Omit<PolicyBrief, "content">;
+
 export type StateStatus = "active" | "developing";
 
 export interface StatePolicyPage {

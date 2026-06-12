@@ -4,7 +4,7 @@ import Link from "next/link";
 import RichTextBody from "@/components/sections/RichTextBody";
 import PolicyBriefPdfViewer from "@/components/sections/PolicyBriefPdfViewer";
 import JsonLd from "@/components/seo/JsonLd";
-import { getPolicyBrief, policyBriefs } from "@/data/policy-briefs";
+import { getPolicyBrief, policyBriefMeta } from "@/data/policy-briefs";
 import { states } from "@/data/states";
 import {
   articleSchema,
@@ -17,7 +17,7 @@ interface PolicyBriefPageProps {
 }
 
 export async function generateStaticParams() {
-  return policyBriefs.map((brief) => ({
+  return policyBriefMeta.map((brief) => ({
     state: brief.stateSlug,
     brief: brief.slug,
   }));

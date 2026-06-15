@@ -6,29 +6,6 @@ import type { Role } from "@/lib/types";
 export const roles: Role[] = [
   // ───── Leadership / Administrative ─────
   {
-    slug: "director-of-human-resources",
-    title: "Director of Human Resources",
-    category: "leadership",
-    type: "leadership",
-    timeCommitment: "8 to 12 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Lead the foundation's people operations: onboarding, retention, internal culture, and the systems that keep our team running.",
-    responsibilities: [
-      "Own the foundation's onboarding process for new members",
-      "Coordinate with department leads on hiring, role definitions, and team structure",
-      "Steward internal culture, communication norms, and conflict resolution",
-      "Maintain accurate records of members, roles, and agreements",
-    ],
-    qualifications: [
-      "Prior experience leading people or operations work, in any setting",
-      "Strong written communication and organization",
-      "Comfort building processes from scratch as the foundation grows",
-    ],
-  },
-  {
     slug: "deputy-director-of-human-resources",
     title: "Deputy Director of Human Resources",
     category: "leadership",
@@ -69,72 +46,6 @@ export const roles: Role[] = [
       "Strong project management instincts",
       "Comfort with documentation and process design",
       "Ability to operate independently and prioritize ruthlessly",
-    ],
-  },
-  {
-    slug: "director-of-finance",
-    title: "Director of Finance",
-    category: "leadership",
-    type: "leadership",
-    timeCommitment: "6 to 10 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Lead the foundation's finances: budgeting, recordkeeping, and the financial transparency that good nonprofits depend on.",
-    responsibilities: [
-      "Maintain accurate financial records for the foundation",
-      "Build and track the annual budget across divisions",
-      "Coordinate with leadership on financial decisions and reporting",
-    ],
-    qualifications: [
-      "Strong accounting fundamentals or willingness to learn quickly",
-      "Comfort with spreadsheets and financial software",
-      "Discretion and judgment with sensitive information",
-    ],
-  },
-  {
-    slug: "deputy-director-of-finance",
-    title: "Deputy Director of Finance",
-    category: "leadership",
-    type: "leadership",
-    timeCommitment: "5 to 8 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Support the Director of Finance with day-to-day financial operations, recordkeeping, and reporting.",
-    responsibilities: [
-      "Support budgeting, recordkeeping, and reporting workflows",
-      "Help review and reconcile financial records",
-      "Assist with financial documentation for leadership decisions",
-    ],
-    qualifications: [
-      "Detail-oriented and trustworthy",
-      "Interest in nonprofit finance, accounting, or operations",
-    ],
-  },
-  {
-    slug: "director-of-civic-affairs",
-    title: "Director of Civic Affairs",
-    category: "leadership",
-    type: "leadership",
-    timeCommitment: "10 to 14 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Lead the Civic Affairs Division: community projects, engagement initiatives, and the outreach work that takes our research home.",
-    responsibilities: [
-      "Set strategy for the Civic Affairs Division and its initiatives",
-      "Lead recruitment and coordination of Civic Affairs team members",
-      "Build and maintain partnerships with community organizations",
-      "Coordinate closely with the Center for Public Policy on outreach",
-    ],
-    qualifications: [
-      "Experience leading community-facing work or volunteer teams",
-      "Strong communication and people skills",
-      "A clear sense of how research and community engagement connect",
     ],
   },
   {

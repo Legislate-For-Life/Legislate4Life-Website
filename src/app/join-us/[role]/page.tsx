@@ -4,7 +4,7 @@ import Link from "next/link";
 import Card from "@/components/ui/Card";
 import JoinUsForm from "@/components/sections/JoinUsForm";
 import JsonLd from "@/components/seo/JsonLd";
-import { roles, ROLE_CATEGORY_INFO } from "@/data/roles";
+import { roles, DEPARTMENT_INFO, TEAM_INFO } from "@/data/roles";
 import type { Role } from "@/lib/types";
 import {
   breadcrumbSchema,
@@ -33,16 +33,14 @@ export async function generateMetadata({
   });
 }
 
-const typeLabels: Record<Role["type"], string> = {
-  leadership: "Leadership",
-  internship: "Internship",
-  volunteer: "Volunteer",
-};
-
 const typeStyles: Record<Role["type"], string> = {
   leadership: "bg-gold-200 text-gold-900",
   internship: "bg-cream-100 text-ink-700",
-  volunteer: "bg-ink-100 text-ink-700",
+};
+
+const typeLabels: Record<Role["type"], string> = {
+  leadership: "Leadership",
+  internship: "Internship",
 };
 
 function openingsLabel(openings: Role["openings"]) {
@@ -57,7 +55,9 @@ export default async function RolePage({ params }: RolePageProps) {
   if (!data) notFound();
 
   const related = roles
-    .filter((r) => r.category === data.category && r.slug !== data.slug)
+    .filter(
+      (r) => r.department === data.department && r.slug !== data.slug,
+    )
     .slice(0, 3);
 
   return (
@@ -96,7 +96,10 @@ export default async function RolePage({ params }: RolePageProps) {
           </Link>
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-300">
-              {ROLE_CATEGORY_INFO[data.category].title}
+              {DEPARTMENT_INFO[data.department].title}
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-300">
+              {TEAM_INFO[data.team]}
             </span>
             <span
               className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 rounded ${typeStyles[data.type]}`}
@@ -239,7 +242,7 @@ export default async function RolePage({ params }: RolePageProps) {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl font-bold text-foreground mb-6">
-              Other open roles in {ROLE_CATEGORY_INFO[data.category].title}
+              Other open roles in {DEPARTMENT_INFO[data.department].title}
             </h2>
             <div className="grid gap-4 sm:grid-cols-3">
               {related.map((r) => (

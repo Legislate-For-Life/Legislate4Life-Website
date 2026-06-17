@@ -217,7 +217,6 @@ export function articleSchema(
 const ROLE_EMPLOYMENT_TYPE: Record<Role["type"], string> = {
   leadership: "PART_TIME",
   internship: "INTERN",
-  volunteer: "VOLUNTEER",
 };
 
 export function jobPostingSchema(role: Role) {

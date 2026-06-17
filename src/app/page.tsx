@@ -44,8 +44,8 @@ export default function Home() {
                 </h2>
                 <p className="text-ink-200 leading-relaxed">
                   The foundation is actively expanding the Center for Public
-                  Policy, the Civic Affairs Division, and Strategy &amp;
-                  Communication. If you want to do real work on real issues,
+                  Policy, the Civic Affairs Department, and Strategy &amp;
+                  Expansion. If you want to do real work on real issues,
                   there&apos;s probably a role for you.
                 </p>
               </div>

@@ -49,18 +49,20 @@ export interface StatePolicyPage {
   recommendations: PolicyRecommendation[];
 }
 
-export type RoleCategory =
-  | "leadership"
-  | "research-writing"
-  | "communications"
-  | "civic-affairs";
+export type RoleDepartment =
+  | "public-policy"
+  | "civic-affairs"
+  | "strategy-expansion";
 
-export type RoleType = "leadership" | "volunteer" | "internship";
+export type RoleTeam = "leadership" | "internship";
+
+export type RoleType = "leadership" | "internship";
 
 export interface Role {
   slug: string;
   title: string;
-  category: RoleCategory;
+  department: RoleDepartment;
+  team: RoleTeam;
   type: RoleType;
   timeCommitment: string;
   location: "Remote" | "In-person" | "Hybrid";

@@ -34,10 +34,10 @@ const departments: Department[] = [
     recruiting: true,
   },
   {
-    name: "Civic Affairs Division",
+    name: "Civic Affairs Department",
     shortName: "Civic Affairs",
     blurb:
-      "Where research meets communities. The Civic Affairs Division runs the foundation's on-the-ground engagement, education, and outreach work.",
+      "Where research meets communities. The Civic Affairs Department runs the foundation's on-the-ground engagement, education, and outreach work.",
     initiatives: [
       "Community-based civic projects",
       "Engagement and education initiatives",
@@ -46,13 +46,13 @@ const departments: Department[] = [
     recruiting: true,
   },
   {
-    name: "Strategy & Communication Department",
-    shortName: "Strategy & Communication",
+    name: "Strategy & Expansion Department",
+    shortName: "Strategy & Expansion",
     blurb:
-      "The team that helps the foundation grow and stay coordinated. Strategy & Communication oversees recruitment, communications, partnerships, and the operations behind everything else.",
+      "The team that helps the foundation grow and stay coordinated. Strategy & Expansion oversees recruitment, finance, communications, partnerships, and the operations behind everything else.",
     initiatives: [
       "Organizational growth and recruitment",
-      "Communications and public outreach",
+      "Finance, communications, and public outreach",
       "Strengthening operations and visibility",
     ],
     recruiting: true,
@@ -252,10 +252,10 @@ export default function AboutPage() {
               writing it, but for the communities living with it.
             </p>
             <p>
-              Today, our work is organized around three divisions: the Center
+              Today, our work is organized around three departments: the Center
               for Public Policy, which produces our research; the Civic
-              Affairs Division, which carries that research into communities;
-              and the Strategy &amp; Communication Department, which keeps
+              Affairs Department, which carries that research into communities;
+              and the Strategy &amp; Expansion Department, which keeps
               everything running and growing. We&apos;re still small, still
               volunteer-led, and still firmly nonpartisan. But the work is
               real, and the team behind it is growing every month.

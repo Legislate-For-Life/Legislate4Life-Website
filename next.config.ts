@@ -45,6 +45,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  async redirects() {
+    return [
+      {
+        source: "/join-us/social-media-team-member",
+        destination: "/join-us/social-media-intern",
+        permanent: true,
+      },
+      {
+        source: "/join-us/civic-affairs-team-member",
+        destination: "/join-us/civic-affairs-intern",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

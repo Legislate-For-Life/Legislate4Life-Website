@@ -5,8 +5,11 @@ import Card from "@/components/ui/Card";
 import NewsletterForm from "@/components/sections/NewsletterForm";
 import {
   roles,
-  ROLE_CATEGORY_INFO,
-  getRolesByCategory,
+  DEPARTMENT_INFO,
+  DEPARTMENT_ORDER,
+  TEAM_INFO,
+  TEAM_ORDER,
+  getRolesByDepartmentAndTeam,
 } from "@/data/roles";
 import type { Role } from "@/lib/types";
 import { DONATE_URL } from "@/lib/constants";
@@ -22,19 +25,75 @@ export const metadata: Metadata = createPageMetadata({
 const typeStyles: Record<Role["type"], string> = {
   leadership: "bg-gold-200 text-gold-900",
   internship: "bg-cream-100 text-ink-700",
-  volunteer: "bg-ink-100 text-ink-700",
 };
 
 const typeLabels: Record<Role["type"], string> = {
   leadership: "Leadership",
   internship: "Internship",
-  volunteer: "Volunteer",
 };
 
 function openingsLabel(openings: Role["openings"]) {
   if (openings === "multiple") return "Multiple openings";
   if (openings === 1) return "1 opening";
   return `${openings} openings`;
+}
+
+function RoleCard({ role }: { role: Role }) {
+  return (
+    <Link href={`/join-us/${role.slug}`} className="group block">
+      <Card className="h-full p-6 group-hover:border-gold-400">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h4 className="text-lg font-semibold text-foreground group-hover:text-gold-600 transition-colors leading-snug">
+            {role.title}
+          </h4>
+          <span
+            className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 rounded whitespace-nowrap ${typeStyles[role.type]}`}
+          >
+            {typeLabels[role.type]}
+          </span>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+          {role.summary}
+        </p>
+        <dl className="grid grid-cols-3 gap-2 text-xs text-ink-700 mb-4">
+          <div>
+            <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
+              Time
+            </dt>
+            <dd>{role.timeCommitment}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
+              Location
+            </dt>
+            <dd>{role.location}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
+              Openings
+            </dt>
+            <dd>{openingsLabel(role.openings)}</dd>
+          </div>
+        </dl>
+        <span className="inline-flex items-center text-sm font-medium text-gold-600 group-hover:text-gold-700 transition-colors">
+          Read more &amp; apply
+          <svg
+            className="ml-1 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </span>
+      </Card>
+    </Link>
+  );
 }
 
 const otherWaysToHelp = [
@@ -46,7 +105,7 @@ const otherWaysToHelp = [
   {
     title: "Attend or Host an Event",
     description:
-      "Join our community events, or work with the Civic Affairs Division to organize one in your area.",
+      "Join our community events, or work with the Civic Affairs Department to organize one in your area.",
   },
   {
     title: "Promote Awareness",
@@ -61,13 +120,6 @@ const otherWaysToHelp = [
 ];
 
 export default function JoinUsPage() {
-  const categoryOrder: Role["category"][] = [
-    "leadership",
-    "research-writing",
-    "communications",
-    "civic-affairs",
-  ];
-
   return (
     <>
       {/* Page header */}
@@ -107,84 +159,49 @@ export default function JoinUsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Open Roles"
-            subtitle={`We're currently filling ${roles.length} positions across leadership, research, writing, and community engagement.`}
+            subtitle={`We're currently filling ${roles.length} positions across our three departments.`}
           />
 
-          <div className="space-y-12">
-            {categoryOrder.map((category) => {
-              const list = getRolesByCategory(category);
-              if (list.length === 0) return null;
+          <div className="space-y-16">
+            {DEPARTMENT_ORDER.map((department) => {
+              const hasRoles = TEAM_ORDER.some(
+                (team) =>
+                  getRolesByDepartmentAndTeam(department, team).length > 0,
+              );
+              if (!hasRoles) return null;
+
               return (
-                <div key={category}>
-                  <div className="mb-6">
-                    <h3 className="text-xl font-bold text-foreground">
-                      {ROLE_CATEGORY_INFO[category].title}
+                <div key={department}>
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-foreground">
+                      {DEPARTMENT_INFO[department].title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {ROLE_CATEGORY_INFO[category].description}
+                    <p className="text-sm text-muted-foreground mt-1 max-w-3xl">
+                      {DEPARTMENT_INFO[department].description}
                     </p>
                   </div>
 
-                  <div className="grid gap-4 lg:grid-cols-2">
-                    {list.map((role) => (
-                      <Link
-                        key={role.slug}
-                        href={`/join-us/${role.slug}`}
-                        className="group block"
-                      >
-                        <Card className="h-full p-6 group-hover:border-gold-400">
-                          <div className="flex items-start justify-between gap-3 mb-3">
-                            <h4 className="text-lg font-semibold text-foreground group-hover:text-gold-600 transition-colors leading-snug">
-                              {role.title}
-                            </h4>
-                            <span
-                              className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-1 rounded whitespace-nowrap ${typeStyles[role.type]}`}
-                            >
-                              {typeLabels[role.type]}
-                            </span>
+                  <div className="space-y-10 pl-0 sm:pl-4 border-l-0 sm:border-l-2 border-ink-100">
+                    {TEAM_ORDER.map((team) => {
+                      const list = getRolesByDepartmentAndTeam(
+                        department,
+                        team,
+                      );
+                      if (list.length === 0) return null;
+
+                      return (
+                        <div key={team} className="sm:pl-6">
+                          <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700 mb-4">
+                            {TEAM_INFO[team]}
+                          </h4>
+                          <div className="grid gap-4 lg:grid-cols-2">
+                            {list.map((role) => (
+                              <RoleCard key={role.slug} role={role} />
+                            ))}
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                            {role.summary}
-                          </p>
-                          <dl className="grid grid-cols-3 gap-2 text-xs text-ink-700 mb-4">
-                            <div>
-                              <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
-                                Time
-                              </dt>
-                              <dd>{role.timeCommitment}</dd>
-                            </div>
-                            <div>
-                              <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
-                                Location
-                              </dt>
-                              <dd>{role.location}</dd>
-                            </div>
-                            <div>
-                              <dt className="font-semibold uppercase tracking-widest text-[10px] text-gold-700">
-                                Openings
-                              </dt>
-                              <dd>{openingsLabel(role.openings)}</dd>
-                            </div>
-                          </dl>
-                          <span className="inline-flex items-center text-sm font-medium text-gold-600 group-hover:text-gold-700 transition-colors">
-                            Read more &amp; apply
-                            <svg
-                              className="ml-1 w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </span>
-                        </Card>
-                      </Link>
-                    ))}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );

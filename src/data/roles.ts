@@ -147,29 +147,6 @@ export const roles: Role[] = [
     ],
   },
   {
-    slug: "operations-director",
-    title: "Operations Director",
-    department: "strategy-expansion",
-    team: "leadership",
-    type: "leadership",
-    timeCommitment: "8 to 12 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Run the day-to-day operations that keep the foundation moving: cross-team coordination, internal tooling, and process.",
-    responsibilities: [
-      "Coordinate work and communication across departments",
-      "Own internal tooling, documentation systems, and meeting rhythms",
-      "Identify and remove operational bottlenecks as the team grows",
-    ],
-    qualifications: [
-      "Strong project management instincts",
-      "Comfort with documentation and process design",
-      "Ability to operate independently and prioritize ruthlessly",
-    ],
-  },
-  {
     slug: "finance-intern",
     title: "Finance Intern",
     department: "strategy-expansion",

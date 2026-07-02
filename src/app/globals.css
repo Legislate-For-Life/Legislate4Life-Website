@@ -49,8 +49,9 @@
   --color-muted: var(--color-cream-50);
   --color-muted-foreground: var(--color-ink-500);
 
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  /* Wired to next/font CSS variables on <html> (see layout.tsx) */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 body {

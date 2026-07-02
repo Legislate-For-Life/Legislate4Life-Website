@@ -9,7 +9,7 @@ const stats: StatItem[] = [
 
 export default function StatsBar() {
   return (
-    <section className="bg-cream-50 py-16 border-y border-ink-100">
+    <section className="bg-cream-50 py-12 border-y border-ink-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {stats.map((stat) => (

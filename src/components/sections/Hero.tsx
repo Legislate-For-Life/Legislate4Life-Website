@@ -23,7 +23,7 @@ export default function Hero() {
         className="absolute -right-40 -top-40 w-[600px] h-[600px] rounded-full bg-gold-500/10 blur-3xl"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-32">
         <div className="max-w-3xl">
           <p className="text-gold-300 text-xs font-semibold uppercase tracking-[0.3em] mb-5">
             The Legislative for Life Foundation

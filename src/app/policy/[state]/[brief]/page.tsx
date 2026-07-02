@@ -85,7 +85,7 @@ export default async function PolicyBriefPage({ params }: PolicyBriefPageProps) 
           ]),
         ]}
       />
-      <section className="bg-ink-900 text-ink-100 py-16">
+      <section className="bg-ink-900 text-ink-100 pt-10 pb-14 sm:pt-12 sm:pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href={`/policy/${stateData.slug}`}

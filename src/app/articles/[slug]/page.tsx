@@ -28,7 +28,7 @@ export async function generateMetadata({
   return createPageMetadata({
     title: post.title,
     description: post.excerpt,
-    path: `/writing/${post.slug}`,
+    path: `/articles/${post.slug}`,
     openGraphType: "article",
     publishedTime: post.date,
     authors: [post.author],
@@ -61,15 +61,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           articleSchema(post),
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Writing", path: "/writing" },
-            { name: post.title, path: `/writing/${post.slug}` },
+            { name: "Articles", path: "/articles" },
+            { name: post.title, path: `/articles/${post.slug}` },
           ]),
         ]}
       />
       <section className="bg-ink-900 text-ink-100 py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
-            href="/writing"
+            href="/articles"
             className="inline-flex items-center text-sm text-gold-300 hover:text-gold-200 transition-colors mb-6"
           >
             <svg
@@ -85,7 +85,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            All Writing
+            All Articles
           </Link>
           <h1 className="text-3xl font-bold sm:text-4xl leading-tight">
             {post.title}
@@ -104,14 +104,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           <hr className="my-12 border-ink-200" />
 
-          {/* Prev / Next navigation */}
           <nav
             aria-label="Article navigation"
             className="grid gap-4 sm:grid-cols-2"
           >
             {prevPost ? (
               <Link
-                href={`/writing/${prevPost.slug}`}
+                href={`/articles/${prevPost.slug}`}
                 className="group block p-5 rounded-lg border border-ink-200 hover:border-gold-400 transition-colors"
               >
                 <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
@@ -126,7 +125,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             )}
             {nextPost ? (
               <Link
-                href={`/writing/${nextPost.slug}`}
+                href={`/articles/${nextPost.slug}`}
                 className="group block p-5 rounded-lg border border-ink-200 hover:border-gold-400 transition-colors text-right"
               >
                 <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
@@ -143,7 +142,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           <div className="mt-10 flex justify-center">
             <Link
-              href="/writing"
+              href="/articles"
               className="inline-flex items-center text-sm font-medium text-gold-600 hover:text-gold-700 transition-colors"
             >
               <svg

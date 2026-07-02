@@ -189,7 +189,7 @@ export function articleSchema(
 ) {
   const url = options?.path
     ? `${SITE_URL}${options.path.startsWith("/") ? options.path : `/${options.path}`}`
-    : `${SITE_URL}/writing/${article.slug}`;
+    : `${SITE_URL}/articles/${article.slug}`;
 
   return {
     "@context": "https://schema.org",

@@ -17,8 +17,9 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Policy", href: "/policy" },
+  { label: "Chapters", href: "/chapters" },
   { label: "Join Us", href: "/join-us" },
-  { label: "Writing", href: "/writing" },
+  { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -29,8 +30,9 @@ export const FOOTER_LINKS_COL_1 = [
 ] as const;
 
 export const FOOTER_LINKS_COL_2 = [
+  { label: "Chapters", href: "/chapters" },
   { label: "Join Us", href: "/join-us" },
-  { label: "Writing", href: "/writing" },
+  { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

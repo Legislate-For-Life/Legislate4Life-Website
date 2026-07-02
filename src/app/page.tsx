@@ -128,20 +128,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured writing */}
+      {/* Featured articles */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-10 flex-wrap gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
-                Writing
+                Articles
               </p>
               <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-                Latest from the Team
+                Latest Articles
               </h2>
             </div>
             <Link
-              href="/writing"
+              href="/articles"
               className="text-sm font-medium text-gold-600 hover:text-gold-700 transition-colors"
             >
               All articles →

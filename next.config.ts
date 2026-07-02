@@ -57,6 +57,16 @@ const nextConfig: NextConfig = {
         destination: "/join-us/civic-affairs-intern",
         permanent: true,
       },
+      {
+        source: "/writing",
+        destination: "/articles",
+        permanent: true,
+      },
+      {
+        source: "/writing/:slug",
+        destination: "/articles/:slug",
+        permanent: true,
+      },
     ];
   },
   async headers() {

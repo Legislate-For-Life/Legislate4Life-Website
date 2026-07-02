@@ -36,7 +36,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/writing`,
+      url: `${SITE_URL}/chapters`,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/chapters/start-a-chapter`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/chapters/toolkit`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/articles`,
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -65,7 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const articlePaths: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${SITE_URL}/writing/${article.slug}`,
+    url: `${SITE_URL}/articles/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: "yearly" as const,
     priority: 0.6,

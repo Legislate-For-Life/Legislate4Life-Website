@@ -171,7 +171,7 @@ export default function JoinUsPage() {
                 Internships
               </p>
               <h2 className="text-2xl font-bold text-foreground mb-3">
-                One application, three preferences
+                Apply for an internship
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                 Apply once for any internship role, including high school

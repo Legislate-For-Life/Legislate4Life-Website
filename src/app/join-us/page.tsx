@@ -16,10 +16,18 @@ import { DONATE_URL } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Join Us",
+  title: "Join Us | High School Internships & Open Roles",
   description:
-    "Apply to open positions at The Legislative for Life Foundation. We're actively recruiting students, researchers, writers, and advocates.",
+    "Apply for high school internships, remote student internships, and leadership roles at The Legislative for Life Foundation. Farm policy research, journalism, civic affairs, and nonprofit operations.",
   path: "/join-us",
+  keywords: [
+    "high school internships",
+    "remote internships for high school students",
+    "nonprofit internships",
+    "farm policy internship",
+    "policy research internship",
+    "student volunteer opportunities",
+  ],
 });
 
 const typeStyles: Record<Role["type"], string> = {
@@ -76,7 +84,7 @@ function RoleCard({ role }: { role: Role }) {
           </div>
         </dl>
         <span className="inline-flex items-center text-sm font-medium text-gold-600 group-hover:text-gold-700 transition-colors">
-          Read more &amp; apply
+          {role.type === "internship" ? "Read role details" : "Read more & apply"}
           <svg
             className="ml-1 w-4 h-4"
             fill="none"
@@ -150,6 +158,52 @@ export default function JoinUsPage() {
             >
               Donate
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Application paths */}
+      <section className="py-14 bg-cream-50 border-b border-ink-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="p-6 sm:p-7 h-full">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
+                Internships
+              </p>
+              <h2 className="text-2xl font-bold text-foreground mb-3">
+                One application, three preferences
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                Apply once for any internship role, including high school
+                internships. Rank your top three positions and we&apos;ll assign
+                you to the best fit across departments.
+              </p>
+              <Link
+                href="/join-us/apply"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
+              >
+                Apply for an internship
+              </Link>
+            </Card>
+            <Card className="p-6 sm:p-7 h-full">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
+                Leadership
+              </p>
+              <h2 className="text-2xl font-bold text-foreground mb-3">
+                Role-specific applications
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                Leadership openings use a dedicated application on each role
+                page. Browse the directory below and apply directly for the
+                position you want.
+              </p>
+              <a
+                href="#open-roles"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-ink-900 text-ink-900 font-semibold hover:bg-ink-900 hover:text-gold-200 transition-colors"
+              >
+                Browse leadership roles
+              </a>
+            </Card>
           </div>
         </div>
       </section>

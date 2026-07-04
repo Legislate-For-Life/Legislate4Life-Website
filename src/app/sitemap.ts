@@ -36,6 +36,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/join-us/apply`,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
       url: `${SITE_URL}/chapters`,
       changeFrequency: "weekly",
       priority: 0.85,

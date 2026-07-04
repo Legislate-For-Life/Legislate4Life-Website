@@ -24,6 +24,7 @@ interface PageMetadataOptions {
   openGraphType?: "website" | "article";
   publishedTime?: string;
   authors?: string[];
+  keywords?: string[];
 }
 
 function canonicalUrl(path: string): string {
@@ -49,6 +50,7 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
       ? { title: { absolute: options.title } }
       : { title: options.title }),
     description: options.description,
+    ...(options.keywords ? { keywords: options.keywords } : {}),
     alternates: {
       canonical: url,
     },
@@ -220,8 +222,26 @@ const ROLE_EMPLOYMENT_TYPE: Record<Role["type"], string> = {
 };
 
 export function jobPostingSchema(role: Role) {
-  const url = `${SITE_URL}/join-us/${role.slug}`;
+  const url =
+    role.type === "internship"
+      ? `${SITE_URL}/join-us/apply`
+      : `${SITE_URL}/join-us/${role.slug}`;
   const isRemote = role.location === "Remote";
+
+  const internshipDetails =
+    role.type === "internship"
+      ? {
+          educationRequirements:
+            "High school students, college students, and recent graduates are welcome to apply.",
+          experienceRequirements: "No prior professional experience required.",
+          skills: role.qualifications.join(" "),
+        }
+      : {};
+
+  const description =
+    role.type === "internship"
+      ? `${role.summary} High school internships available. Time commitment: ${role.timeCommitment}. Location: ${role.location}.`
+      : `${role.summary}\n\nTime commitment: ${role.timeCommitment}. Location: ${role.location}.`;
 
   const locationFields = isRemote
     ? {
@@ -248,7 +268,8 @@ export function jobPostingSchema(role: Role) {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: role.title,
-    description: `${role.summary}\n\nTime commitment: ${role.timeCommitment}. Location: ${role.location}.`,
+    description,
+    ...internshipDetails,
     identifier: {
       "@type": "PropertyValue",
       name: ORG_NAME,
@@ -275,6 +296,34 @@ export function jobPostingSchema(role: Role) {
     },
     directApply: true,
     url,
+  };
+}
+
+/** Structured data for the centralized internship application page. */
+export function internshipApplicationPageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "High School Internships and Student Intern Applications",
+    description:
+      "Apply for high school internships, remote student internships, and volunteer policy research roles at The Legislative for Life Foundation.",
+    url: `${SITE_URL}/join-us/apply`,
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
+    about: {
+      "@type": "EducationalOccupationalProgram",
+      name: "Student Internship Program",
+      description:
+        "Remote and hybrid internships for high school students, college students, and recent graduates interested in farm policy research, public education, journalism, civic affairs, and nonprofit operations.",
+      provider: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+      occupationalCategory: "Internship",
+      educationalProgramMode: "online",
+      timeToComplete: "P1Y",
+    },
+    inLanguage: "en-US",
   };
 }
 

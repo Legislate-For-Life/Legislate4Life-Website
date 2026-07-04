@@ -1,40 +1,139 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Button from "@/components/ui/Button";
-
-interface JoinUsFormProps {
-  roleTitle?: string;
-  roleSlug?: string;
-}
+import {
+  DEPARTMENT_INFO,
+  DEPARTMENT_ORDER,
+  getInternRoles,
+} from "@/data/roles";
 
 interface SubmitState {
   status: "idle" | "submitting" | "success" | "error";
   message?: string;
 }
 
-export default function JoinUsForm({
-  roleTitle,
-  roleSlug,
-}: JoinUsFormProps = {}) {
+const internRoles = getInternRoles();
+
+function isValidInternSlug(slug: string) {
+  return internRoles.some((role) => role.slug === slug);
+}
+
+function RoleSelect({
+  id,
+  label,
+  name,
+  value,
+  onChange,
+  disabled,
+  exclude,
+}: {
+  id: string;
+  label: string;
+  name: string;
+  value: string;
+  onChange: (value: string) => void;
+  disabled: boolean;
+  exclude: string[];
+}) {
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium text-foreground mb-1"
+      >
+        {label}
+      </label>
+      <select
+        id={id}
+        name={name}
+        required
+        disabled={disabled}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60 bg-white"
+      >
+        <option value="" disabled>
+          Select a role
+        </option>
+        {DEPARTMENT_ORDER.map((department) => {
+          const departmentRoles = internRoles.filter(
+            (role) => role.department === department,
+          );
+          if (departmentRoles.length === 0) return null;
+
+          return (
+            <optgroup
+              key={department}
+              label={DEPARTMENT_INFO[department].title}
+            >
+              {departmentRoles.map((role) => (
+                <option
+                  key={role.slug}
+                  value={role.slug}
+                  disabled={exclude.includes(role.slug) && role.slug !== value}
+                >
+                  {role.title}
+                </option>
+              ))}
+            </optgroup>
+          );
+        })}
+      </select>
+    </div>
+  );
+}
+
+export default function InternApplicationForm() {
+  const searchParams = useSearchParams();
+  const prefillFirst = searchParams.get("first") ?? "";
+
+  const [firstChoice, setFirstChoice] = useState(
+    isValidInternSlug(prefillFirst) ? prefillFirst : "",
+  );
+  const [secondChoice, setSecondChoice] = useState("");
+  const [thirdChoice, setThirdChoice] = useState("");
   const [state, setState] = useState<SubmitState>({ status: "idle" });
+
+  const choices = useMemo(
+    () => [firstChoice, secondChoice, thirdChoice],
+    [firstChoice, secondChoice, thirdChoice],
+  );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (state.status === "submitting") return;
 
+    const uniqueChoices = new Set(choices);
+    if (choices.some((choice) => !choice)) {
+      setState({
+        status: "error",
+        message: "Please select all three role preferences.",
+      });
+      return;
+    }
+
+    if (uniqueChoices.size !== 3) {
+      setState({
+        status: "error",
+        message: "Each role preference must be different.",
+      });
+      return;
+    }
+
     const form = e.currentTarget;
     const data = new FormData(form);
     const payload = {
-      applicationType: "leadership",
+      applicationType: "intern",
+      roleChoices: choices,
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
       resume: String(data.get("resume") ?? ""),
       experience: String(data.get("experience") ?? ""),
       why: String(data.get("why") ?? ""),
-      role: String(data.get("role") ?? roleSlug ?? ""),
       company: String(data.get("company") ?? ""),
     };
 
@@ -88,9 +187,8 @@ export default function JoinUsForm({
           Application Received
         </h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          Thanks for applying{roleTitle ? ` for ${roleTitle}` : ""}. We&apos;ll
-          review your application and respond within{" "}
-          <strong>1 to 2 business days</strong>.
+          Thanks for applying. We&apos;ll review your preferences and respond
+          within <strong>1 to 2 business days</strong>.
         </p>
       </div>
     );
@@ -100,9 +198,6 @@ export default function JoinUsForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {roleSlug && <input type="hidden" name="role" value={roleSlug} />}
-
-      {/* Honeypot field. Hidden from users; bots fill it in and get silently rejected. */}
       <div
         aria-hidden="true"
         style={{
@@ -114,9 +209,9 @@ export default function JoinUsForm({
           overflow: "hidden",
         }}
       >
-        <label htmlFor="applicant-company">Company</label>
+        <label htmlFor="intern-company">Company</label>
         <input
-          id="applicant-company"
+          id="intern-company"
           name="company"
           type="text"
           tabIndex={-1}
@@ -124,16 +219,57 @@ export default function JoinUsForm({
         />
       </div>
 
+      <div className="rounded-xl border border-ink-100 bg-cream-50 p-5 sm:p-6 space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-foreground">
+            Role preferences
+          </h3>
+          <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+            Choose your top three internship roles in order of preference. High
+            school students, college students, and recent graduates are welcome.
+            We use this to place applicants in the best fit across departments.
+          </p>
+        </div>
+
+        <RoleSelect
+          id="intern-choice-1"
+          label="First choice"
+          name="choice1"
+          value={firstChoice}
+          onChange={setFirstChoice}
+          disabled={submitting}
+          exclude={[secondChoice, thirdChoice]}
+        />
+        <RoleSelect
+          id="intern-choice-2"
+          label="Second choice"
+          name="choice2"
+          value={secondChoice}
+          onChange={setSecondChoice}
+          disabled={submitting}
+          exclude={[firstChoice, thirdChoice]}
+        />
+        <RoleSelect
+          id="intern-choice-3"
+          label="Third choice"
+          name="choice3"
+          value={thirdChoice}
+          onChange={setThirdChoice}
+          disabled={submitting}
+          exclude={[firstChoice, secondChoice]}
+        />
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
-            htmlFor="applicant-name"
+            htmlFor="intern-name"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Full Name
           </label>
           <input
-            id="applicant-name"
+            id="intern-name"
             name="name"
             type="text"
             required
@@ -144,13 +280,13 @@ export default function JoinUsForm({
         </div>
         <div>
           <label
-            htmlFor="applicant-email"
+            htmlFor="intern-email"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Email
           </label>
           <input
-            id="applicant-email"
+            id="intern-email"
             name="email"
             type="email"
             required
@@ -164,13 +300,13 @@ export default function JoinUsForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
-            htmlFor="applicant-phone"
+            htmlFor="intern-phone"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Phone Number
           </label>
           <input
-            id="applicant-phone"
+            id="intern-phone"
             name="phone"
             type="tel"
             required
@@ -181,13 +317,13 @@ export default function JoinUsForm({
         </div>
         <div>
           <label
-            htmlFor="applicant-resume"
+            htmlFor="intern-resume"
             className="block text-sm font-medium text-foreground mb-1"
           >
             Resume Link
           </label>
           <input
-            id="applicant-resume"
+            id="intern-resume"
             name="resume"
             type="url"
             required
@@ -200,31 +336,31 @@ export default function JoinUsForm({
 
       <div>
         <label
-          htmlFor="applicant-experience"
+          htmlFor="intern-experience"
           className="block text-sm font-medium text-foreground mb-1"
         >
           Relevant Experience
         </label>
         <textarea
-          id="applicant-experience"
+          id="intern-experience"
           name="experience"
           rows={4}
           required
           disabled={submitting}
           className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y disabled:opacity-60"
-          placeholder="Briefly describe the experience, coursework, projects, or skills that are relevant to this role."
+          placeholder="Briefly describe the experience, coursework, projects, or skills that are relevant to the roles you selected."
         />
       </div>
 
       <div>
         <label
-          htmlFor="applicant-why"
+          htmlFor="intern-why"
           className="block text-sm font-medium text-foreground mb-1"
         >
           Why do you want to join The Legislative for Life Foundation?
         </label>
         <textarea
-          id="applicant-why"
+          id="intern-why"
           name="why"
           rows={4}
           required
@@ -235,7 +371,7 @@ export default function JoinUsForm({
       </div>
 
       <p className="text-xs text-muted-foreground">
-        We respond within 1 to 2 business days. Some leadership roles include a
+        We respond within 1 to 2 business days. Some internship roles include a
         signed onboarding agreement as part of getting started. By submitting
         your application, you agree to our{" "}
         <Link
@@ -257,7 +393,7 @@ export default function JoinUsForm({
       )}
 
       <Button type="submit">
-        {submitting ? "Submitting..." : "Submit Application"}
+        {submitting ? "Submitting..." : "Submit Intern Application"}
       </Button>
     </form>
   );

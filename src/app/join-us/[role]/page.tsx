@@ -221,19 +221,43 @@ export default async function RolePage({ params }: RolePageProps) {
         </div>
       </section>
 
-      {/* Application form */}
+      {/* Application */}
       <section id="apply" className="py-16 bg-cream-50 scroll-mt-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-foreground mb-3">
-            Apply for this role
-          </h2>
-          <p className="text-muted-foreground mb-8">
-            Fill out the short application below. We respond within 1 to 2
-            business days.
-          </p>
-          <Card className="p-6 sm:p-8">
-            <JoinUsForm roleTitle={data.title} roleSlug={data.slug} />
-          </Card>
+          {data.type === "internship" ? (
+            <>
+              <h2 className="text-2xl font-bold text-foreground mb-3">
+                Apply for this internship
+              </h2>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Internship applications are centralized. Submit one application,
+                rank your top three role preferences, and we&apos;ll assign you
+                to the best fit across departments. This role can be included
+                as one of your choices.
+              </p>
+              <Card className="p-6 sm:p-8">
+                <Link
+                  href={`/join-us/apply?first=${data.slug}`}
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
+                >
+                  Start intern application
+                </Link>
+              </Card>
+            </>
+          ) : (
+            <>
+              <h2 className="text-2xl font-bold text-foreground mb-3">
+                Apply for this role
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Fill out the short application below. We respond within 1 to 2
+                business days.
+              </p>
+              <Card className="p-6 sm:p-8">
+                <JoinUsForm roleTitle={data.title} roleSlug={data.slug} />
+              </Card>
+            </>
+          )}
         </div>
       </section>
 

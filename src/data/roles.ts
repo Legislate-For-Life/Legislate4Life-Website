@@ -55,28 +55,6 @@ export const roles: Role[] = [
 
   // ───── Civic Affairs Department ─────
   {
-    slug: "deputy-director-of-civic-affairs",
-    title: "Deputy Director of Civic Affairs",
-    department: "civic-affairs",
-    team: "leadership",
-    type: "leadership",
-    timeCommitment: "8 to 12 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Support the Director of Civic Affairs in running the department and its community-facing initiatives.",
-    responsibilities: [
-      "Help coordinate Civic Affairs initiatives and team members",
-      "Support partnerships with community organizations",
-      "Step in to lead specific projects under the Director's direction",
-    ],
-    qualifications: [
-      "Reliable, organized, and good at coordinating with multiple stakeholders",
-      "Interest in community engagement and civic education",
-    ],
-  },
-  {
     slug: "community-engagement-intern",
     title: "Community Engagement Intern",
     department: "civic-affairs",
@@ -263,4 +241,12 @@ export function getRolesByDepartmentAndTeam(
   team: RoleTeam,
 ) {
   return roles.filter((r) => r.department === department && r.team === team);
+}
+
+export function getInternRoles() {
+  return roles.filter((r) => r.type === "internship");
+}
+
+export function getLeadershipRoles() {
+  return roles.filter((r) => r.type === "leadership");
 }

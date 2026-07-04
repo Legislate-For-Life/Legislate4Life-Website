@@ -23,9 +23,9 @@ export default function Hero() {
         className="absolute -right-40 -top-40 w-[600px] h-[600px] rounded-full bg-gold-500/10 blur-3xl"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 sm:pt-10 sm:pb-24 lg:pt-12 lg:pb-32">
         <div className="max-w-3xl">
-          <p className="text-gold-300 text-xs font-semibold uppercase tracking-[0.3em] mb-5">
+          <p className="text-gold-300 text-xs font-semibold uppercase tracking-[0.3em] mb-3">
             The Legislative for Life Foundation
           </p>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl leading-[1.1]">
@@ -33,11 +33,11 @@ export default function Hero() {
             <span className="text-gold-300">communities.</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-ink-200 leading-relaxed max-w-2xl">
-            We translate research and lived experience into clear,
-            practical understanding of the issues shaping life across America
-            and beyond. Through policy analysis, public education, and
-            community engagement, we help leaders and neighbors make better
-            decisions together.
+            We focus on farm policy and the issues facing rural communities,
+            turning research and lived experience into clear, practical guidance
+            for policymakers and agricultural families. Through policy analysis,
+            public education, and community engagement, we help leaders and
+            rural neighbors work toward better-informed decisions together.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button href="/join-us" size="lg">

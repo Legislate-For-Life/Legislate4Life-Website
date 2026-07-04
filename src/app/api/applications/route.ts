@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { CONTACT_INFO, ORG_NAME } from "@/lib/constants";
-import { roles } from "@/data/roles";
+import { DEPARTMENT_INFO, getInternRoles, roles } from "@/data/roles";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,7 +9,10 @@ export const dynamic = "force-dynamic";
 const FROM_ADDRESS = `${ORG_NAME} <applications@legislateforlife.org>`;
 const TO_ADDRESS = CONTACT_INFO.email;
 
+const internRoleSlugs = new Set(getInternRoles().map((role) => role.slug));
+
 interface ApplicationPayload {
+  applicationType?: "intern" | "leadership";
   name?: string;
   email?: string;
   phone?: string;
@@ -17,6 +20,7 @@ interface ApplicationPayload {
   experience?: string;
   why?: string;
   role?: string;
+  roleChoices?: string[];
   // Honeypot.
   company?: string;
 }
@@ -39,6 +43,15 @@ function sanitizeHeaderValue(value: string): string {
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, 200);
+}
+
+function formatRoleChoice(slug: string, rank: number) {
+  const role = roles.find((entry) => entry.slug === slug);
+  if (!role) {
+    return `${rank}. Unspecified role (${slug})`;
+  }
+
+  return `${rank}. ${role.title} (${role.slug}) - ${DEPARTMENT_INFO[role.department].title}`;
 }
 
 export async function POST(request: Request) {
@@ -79,6 +92,10 @@ export async function POST(request: Request) {
   const experience = (body.experience ?? "").trim();
   const why = (body.why ?? "").trim();
   const roleSlug = (body.role ?? "").trim();
+  const roleChoices = (body.roleChoices ?? []).map((choice) => choice.trim());
+  const applicationType =
+    body.applicationType ??
+    (roleChoices.length > 0 ? "intern" : "leadership");
 
   if (!name || !email || !phone || !resume || !experience || !why) {
     return NextResponse.json(
@@ -114,16 +131,73 @@ export async function POST(request: Request) {
     );
   }
 
-  const matchingRole = roles.find((r) => r.slug === roleSlug);
-  const roleTitle = matchingRole?.title ?? "Unspecified role";
-  const subjectRolePart = matchingRole?.title ?? "General";
+  let roleTitle = "Unspecified role";
+  let subjectRolePart = "General";
+  let roleHtml = "";
+  let roleText = "";
+
+  if (applicationType === "intern") {
+    if (roleChoices.length !== 3) {
+      return NextResponse.json(
+        { error: "Please select three role preferences." },
+        { status: 400 },
+      );
+    }
+
+    const uniqueChoices = new Set(roleChoices);
+    if (uniqueChoices.size !== 3) {
+      return NextResponse.json(
+        { error: "Each role preference must be different." },
+        { status: 400 },
+      );
+    }
+
+    if (!roleChoices.every((choice) => internRoleSlugs.has(choice))) {
+      return NextResponse.json(
+        { error: "One or more selected roles are invalid." },
+        { status: 400 },
+      );
+    }
+
+    roleTitle = "Internship (ranked preferences)";
+    subjectRolePart = "Internship";
+
+    const choiceRows = roleChoices
+      .map(
+        (choice, index) =>
+          `<tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; width:140px; vertical-align:top;">Choice ${index + 1}</td><td style="padding:8px 12px;">${escapeHtml(formatRoleChoice(choice, index + 1))}</td></tr>`,
+      )
+      .join("");
+
+    roleHtml = `
+      <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; width:140px; vertical-align:top;">Application type</td><td style="padding:8px 12px;">Internship (centralized)</td></tr>
+      ${choiceRows}
+    `;
+
+    roleText = `Application type: Internship (centralized)
+
+Ranked role preferences:
+${roleChoices.map((choice, index) => formatRoleChoice(choice, index + 1)).join("\n")}`;
+  } else {
+    const matchingRole = roles.find((entry) => entry.slug === roleSlug);
+    roleTitle = matchingRole?.title ?? "Unspecified role";
+    subjectRolePart = matchingRole?.title ?? "General";
+
+    roleHtml = `
+      <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; width:140px; vertical-align:top;">Application type</td><td style="padding:8px 12px;">Leadership</td></tr>
+      <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Role</td><td style="padding:8px 12px;">${escapeHtml(roleTitle)}${matchingRole ? ` <span style="color:#9ca3af; font-size: 12px;">(${escapeHtml(matchingRole.slug)})</span>` : ""}</td></tr>
+    `;
+
+    roleText = `Application type: Leadership
+Role:    ${roleTitle}${matchingRole ? ` (${matchingRole.slug})` : ""}`;
+  }
 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 680px; color:#111827;">
       <h2 style="font-size: 18px; margin: 0 0 4px; font-weight: 700;">New application: ${escapeHtml(roleTitle)}</h2>
       <p style="color:#6b7280; margin: 0 0 24px; font-size: 13px;">Submitted from legislateforlife.org/join-us.</p>
       <table style="border-collapse: collapse; width: 100%; font-size: 14px;">
-        <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; width:140px; vertical-align:top;">Role</td><td style="padding:8px 12px;">${escapeHtml(roleTitle)}${matchingRole ? ` <span style="color:#9ca3af; font-size: 12px;">(${escapeHtml(matchingRole.slug)})</span>` : ""}</td></tr>
+        ${roleHtml}
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Name</td><td style="padding:8px 12px;">${escapeHtml(name)}</td></tr>
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Email</td><td style="padding:8px 12px;"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Phone</td><td style="padding:8px 12px;"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></td></tr>
@@ -140,7 +214,7 @@ export async function POST(request: Request) {
 
   const text = `New application: ${roleTitle}
 
-Role:    ${roleTitle}${matchingRole ? ` (${matchingRole.slug})` : ""}
+${roleText}
 Name:    ${name}
 Email:   ${email}
 Phone:   ${phone}

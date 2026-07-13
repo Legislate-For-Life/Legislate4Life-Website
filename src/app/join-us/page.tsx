@@ -7,13 +7,9 @@ import {
   roles,
   DEPARTMENT_INFO,
   DEPARTMENT_ORDER,
-  SUBCATEGORY_INFO,
-  SUBCATEGORY_ORDER,
   TEAM_INFO,
   TEAM_ORDER,
   getRolesByDepartmentAndTeam,
-  getRolesByDepartmentTeamAndSubcategory,
-  getRolesByDepartmentTeamWithoutSubcategory,
 } from "@/data/roles";
 import type { Role } from "@/lib/types";
 import { DONATE_URL } from "@/lib/constants";
@@ -217,7 +213,7 @@ export default function JoinUsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Open Roles"
-            subtitle={`We're currently filling ${roles.length} positions across our three departments.`}
+            subtitle={`We're currently filling ${roles.length} positions across our departments.`}
           />
 
           <div className="space-y-16">
@@ -241,67 +237,21 @@ export default function JoinUsPage() {
 
                   <div className="space-y-10 pl-0 sm:pl-4 border-l-0 sm:border-l-2 border-ink-100">
                     {TEAM_ORDER.map((team) => {
-                      const teamRoles = getRolesByDepartmentAndTeam(
+                      const list = getRolesByDepartmentAndTeam(
                         department,
                         team,
                       );
-                      if (teamRoles.length === 0) return null;
-
-                      const subcategories = SUBCATEGORY_ORDER.filter(
-                        (subcategory) =>
-                          getRolesByDepartmentTeamAndSubcategory(
-                            department,
-                            team,
-                            subcategory,
-                          ).length > 0,
-                      );
-                      const generalRoles =
-                        getRolesByDepartmentTeamWithoutSubcategory(
-                          department,
-                          team,
-                        );
+                      if (list.length === 0) return null;
 
                       return (
                         <div key={team} className="sm:pl-6">
                           <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700 mb-4">
                             {TEAM_INFO[team]}
                           </h4>
-
-                          <div className="space-y-8">
-                            {subcategories.map((subcategory) => {
-                              const list = getRolesByDepartmentTeamAndSubcategory(
-                                department,
-                                team,
-                                subcategory,
-                              );
-
-                              return (
-                                <div key={subcategory}>
-                                  <h5 className="text-sm font-semibold text-foreground mb-1">
-                                    {SUBCATEGORY_INFO[subcategory].title}
-                                  </h5>
-                                  <p className="text-xs text-muted-foreground mb-4 max-w-3xl">
-                                    {
-                                      SUBCATEGORY_INFO[subcategory]
-                                        .description
-                                    }
-                                  </p>
-                                  <div className="grid gap-4 lg:grid-cols-2">
-                                    {list.map((role) => (
-                                      <RoleCard key={role.slug} role={role} />
-                                    ))}
-                                  </div>
-                                </div>
-                              );
-                            })}
-
-                            {generalRoles.length > 0 && (
-                              <div className="grid gap-4 lg:grid-cols-2">
-                                {generalRoles.map((role) => (
-                                  <RoleCard key={role.slug} role={role} />
-                                ))}
-                              </div>
-                            )}
+                          <div className="grid gap-4 lg:grid-cols-2">
+                            {list.map((role) => (
+                              <RoleCard key={role.slug} role={role} />
+                            ))}
                           </div>
                         </div>
                       );

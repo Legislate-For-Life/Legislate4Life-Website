@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Button from "@/components/ui/Button";
 import {
-  getInternRoleSelectGroups,
+  DEPARTMENT_INFO,
+  DEPARTMENT_ORDER,
   getInternRoles,
 } from "@/data/roles";
 
@@ -15,7 +16,6 @@ interface SubmitState {
 }
 
 const internRoles = getInternRoles();
-const internRoleGroups = getInternRoleSelectGroups();
 
 function isValidInternSlug(slug: string) {
   return internRoles.some((role) => role.slug === slug);
@@ -58,9 +58,18 @@ function RoleSelect({
         <option value="" disabled>
           Select a role
         </option>
-        {internRoleGroups.map((group) => (
-            <optgroup key={group.label} label={group.label}>
-              {group.roles.map((role) => (
+        {DEPARTMENT_ORDER.map((department) => {
+          const departmentRoles = internRoles.filter(
+            (role) => role.department === department,
+          );
+          if (departmentRoles.length === 0) return null;
+
+          return (
+            <optgroup
+              key={department}
+              label={DEPARTMENT_INFO[department].title}
+            >
+              {departmentRoles.map((role) => (
                 <option
                   key={role.slug}
                   value={role.slug}
@@ -70,7 +79,8 @@ function RoleSelect({
                 </option>
               ))}
             </optgroup>
-          ))}
+          );
+        })}
       </select>
     </div>
   );

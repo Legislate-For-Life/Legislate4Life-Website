@@ -1,4 +1,4 @@
-import type { Role, RoleDepartment, RoleTeam } from "@/lib/types";
+import type { Role, RoleDepartment, RoleSubcategory, RoleTeam } from "@/lib/types";
 
 // All open roles at The Legislative for Life Foundation. Responsibilities and
 // qualifications are starting points and may be refined as full role descriptions
@@ -129,6 +129,7 @@ export const roles: Role[] = [
     title: "Finance Intern",
     department: "strategy-expansion",
     team: "internship",
+    subcategory: "finance",
     type: "internship",
     timeCommitment: "4 to 6 hours / week",
     location: "Remote",
@@ -145,6 +146,31 @@ export const roles: Role[] = [
       "Detail-oriented and trustworthy with sensitive information",
       "Comfort with spreadsheets or willingness to learn quickly",
       "Interest in nonprofit finance, accounting, or operations",
+    ],
+  },
+  {
+    slug: "grant-writing-intern",
+    title: "Grant Writing Intern",
+    department: "strategy-expansion",
+    team: "internship",
+    subcategory: "finance",
+    type: "internship",
+    timeCommitment: "3 to 5 hours / week",
+    location: "Remote",
+    openings: "multiple",
+    requiresOnboardingAgreement: false,
+    summary:
+      "Support the finance team with grant research, drafting, and the written materials that help the foundation pursue funding for its research and public education work.",
+    responsibilities: [
+      "Research grant opportunities aligned with the foundation's mission and programs",
+      "Draft and revise grant application materials, narratives, and supporting documents",
+      "Help organize deadlines, requirements, and submission materials for the finance team",
+      "Coordinate with department leads to gather program details and impact information",
+    ],
+    qualifications: [
+      "Strong research and writing skills with attention to detail",
+      "Comfort working with deadlines and structured application requirements",
+      "Interest in nonprofit finance, fundraising, or grant development",
     ],
   },
   {
@@ -206,6 +232,19 @@ export const DEPARTMENT_ORDER: RoleDepartment[] = [
 
 export const TEAM_ORDER: RoleTeam[] = ["leadership", "internship"];
 
+export const SUBCATEGORY_ORDER: RoleSubcategory[] = ["finance"];
+
+export const SUBCATEGORY_INFO: Record<
+  RoleSubcategory,
+  { title: string; description: string }
+> = {
+  finance: {
+    title: "Finance",
+    description:
+      "Internships supporting budgeting, grants, recordkeeping, and the financial operations behind the foundation's work.",
+  },
+};
+
 export const DEPARTMENT_INFO: Record<
   RoleDepartment,
   { title: string; description: string }
@@ -241,6 +280,65 @@ export function getRolesByDepartmentAndTeam(
   team: RoleTeam,
 ) {
   return roles.filter((r) => r.department === department && r.team === team);
+}
+
+export function getRolesByDepartmentTeamAndSubcategory(
+  department: RoleDepartment,
+  team: RoleTeam,
+  subcategory: RoleSubcategory,
+) {
+  return roles.filter(
+    (r) =>
+      r.department === department &&
+      r.team === team &&
+      r.subcategory === subcategory,
+  );
+}
+
+export function getRolesByDepartmentTeamWithoutSubcategory(
+  department: RoleDepartment,
+  team: RoleTeam,
+) {
+  return roles.filter(
+    (r) =>
+      r.department === department && r.team === team && r.subcategory == null,
+  );
+}
+
+/** Optgroups for the centralized intern application role selects. */
+export function getInternRoleSelectGroups() {
+  const groups: { label: string; roles: Role[] }[] = [];
+
+  for (const department of DEPARTMENT_ORDER) {
+    const departmentInterns = roles.filter(
+      (role) => role.type === "internship" && role.department === department,
+    );
+    if (departmentInterns.length === 0) continue;
+
+    const subcategories = SUBCATEGORY_ORDER.filter((subcategory) =>
+      departmentInterns.some((role) => role.subcategory === subcategory),
+    );
+
+    for (const subcategory of subcategories) {
+      const subcategoryRoles = departmentInterns.filter(
+        (role) => role.subcategory === subcategory,
+      );
+      groups.push({
+        label: `${DEPARTMENT_INFO[department].title}: ${SUBCATEGORY_INFO[subcategory].title}`,
+        roles: subcategoryRoles,
+      });
+    }
+
+    const generalRoles = departmentInterns.filter((role) => !role.subcategory);
+    if (generalRoles.length > 0) {
+      groups.push({
+        label: DEPARTMENT_INFO[department].title,
+        roles: generalRoles,
+      });
+    }
+  }
+
+  return groups;
 }
 
 export function getInternRoles() {

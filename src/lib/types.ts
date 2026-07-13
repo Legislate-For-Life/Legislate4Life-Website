@@ -56,6 +56,8 @@ export type RoleDepartment =
 
 export type RoleTeam = "leadership" | "internship";
 
+export type RoleSubcategory = "finance";
+
 export type RoleType = "leadership" | "internship";
 
 export interface Role {
@@ -63,6 +65,7 @@ export interface Role {
   title: string;
   department: RoleDepartment;
   team: RoleTeam;
+  subcategory?: RoleSubcategory;
   type: RoleType;
   timeCommitment: string;
   location: "Remote" | "In-person" | "Hybrid";

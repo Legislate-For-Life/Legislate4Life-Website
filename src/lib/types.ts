@@ -52,7 +52,6 @@ export interface StatePolicyPage {
 export type RoleDepartment =
   | "public-policy"
   | "civic-affairs"
-  | "finance"
   | "strategy-expansion";
 
 export type RoleTeam = "leadership" | "internship";

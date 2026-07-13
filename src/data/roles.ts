@@ -101,55 +101,6 @@ export const roles: Role[] = [
     ],
   },
 
-  // ───── Finance Department ─────
-  {
-    slug: "finance-intern",
-    title: "Finance Intern",
-    department: "finance",
-    team: "internship",
-    type: "internship",
-    timeCommitment: "4 to 6 hours / week",
-    location: "Remote",
-    openings: "multiple",
-    requiresOnboardingAgreement: true,
-    summary:
-      "Support the Finance Department with budgeting, recordkeeping, and the day-to-day work that keeps the foundation transparent and organized.",
-    responsibilities: [
-      "Help maintain financial records and supporting documentation",
-      "Assist with budget tracking and simple reporting workflows",
-      "Support the finance leadership team with research and data organization",
-    ],
-    qualifications: [
-      "Detail-oriented and trustworthy with sensitive information",
-      "Comfort with spreadsheets or willingness to learn quickly",
-      "Interest in nonprofit finance, accounting, or operations",
-    ],
-  },
-  {
-    slug: "grant-writing-intern",
-    title: "Grant Writing Intern",
-    department: "finance",
-    team: "internship",
-    type: "internship",
-    timeCommitment: "3 to 5 hours / week",
-    location: "Remote",
-    openings: "multiple",
-    requiresOnboardingAgreement: false,
-    summary:
-      "Support the Finance Department with grant research, drafting, and the written materials that help the foundation pursue funding for its research and public education work.",
-    responsibilities: [
-      "Research grant opportunities aligned with the foundation's mission and programs",
-      "Draft and revise grant application materials, narratives, and supporting documents",
-      "Help organize deadlines, requirements, and submission materials for the finance team",
-      "Coordinate with department leads to gather program details and impact information",
-    ],
-    qualifications: [
-      "Strong research and writing skills with attention to detail",
-      "Comfort working with deadlines and structured application requirements",
-      "Interest in nonprofit finance, fundraising, or grant development",
-    ],
-  },
-
   // ───── Strategy & Expansion Department ─────
   {
     slug: "deputy-director-of-human-resources",
@@ -171,6 +122,53 @@ export const roles: Role[] = [
     qualifications: [
       "Reliable, detail-oriented, and good at follow-through",
       "Interested in people operations and organizational growth",
+    ],
+  },
+  {
+    slug: "finance-intern",
+    title: "Finance Intern",
+    department: "strategy-expansion",
+    team: "internship",
+    type: "internship",
+    timeCommitment: "4 to 6 hours / week",
+    location: "Remote",
+    openings: "multiple",
+    requiresOnboardingAgreement: true,
+    summary:
+      "Support the Strategy & Expansion Department's finance team with budgeting, recordkeeping, and the day-to-day work that keeps the foundation transparent and organized.",
+    responsibilities: [
+      "Help maintain financial records and supporting documentation",
+      "Assist with budget tracking and simple reporting workflows",
+      "Support the finance leadership team with research and data organization",
+    ],
+    qualifications: [
+      "Detail-oriented and trustworthy with sensitive information",
+      "Comfort with spreadsheets or willingness to learn quickly",
+      "Interest in nonprofit finance, accounting, or operations",
+    ],
+  },
+  {
+    slug: "grant-writing-intern",
+    title: "Grant Writing Intern",
+    department: "strategy-expansion",
+    team: "internship",
+    type: "internship",
+    timeCommitment: "3 to 5 hours / week",
+    location: "Remote",
+    openings: "multiple",
+    requiresOnboardingAgreement: false,
+    summary:
+      "Support the Strategy & Expansion Department's finance team with grant research, drafting, and the written materials that help the foundation pursue funding for its research and public education work.",
+    responsibilities: [
+      "Research grant opportunities aligned with the foundation's mission and programs",
+      "Draft and revise grant application materials, narratives, and supporting documents",
+      "Help organize deadlines, requirements, and submission materials for the finance team",
+      "Coordinate with department leads to gather program details and impact information",
+    ],
+    qualifications: [
+      "Strong research and writing skills with attention to detail",
+      "Comfort working with deadlines and structured application requirements",
+      "Interest in nonprofit finance, fundraising, or grant development",
     ],
   },
   {
@@ -227,7 +225,6 @@ export const roles: Role[] = [
 export const DEPARTMENT_ORDER: RoleDepartment[] = [
   "public-policy",
   "civic-affairs",
-  "finance",
   "strategy-expansion",
 ];
 
@@ -246,11 +243,6 @@ export const DEPARTMENT_INFO: Record<
     title: "Civic Affairs Department",
     description:
       "Community-facing roles that carry the foundation's work into the places it serves.",
-  },
-  finance: {
-    title: "Finance Department",
-    description:
-      "Roles supporting budgeting, grants, recordkeeping, and the financial operations behind the foundation's work.",
   },
   "strategy-expansion": {
     title: "Strategy & Expansion Department",

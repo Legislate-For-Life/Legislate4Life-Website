@@ -103,28 +103,6 @@ export const roles: Role[] = [
 
   // ───── Strategy & Expansion Department ─────
   {
-    slug: "deputy-director-of-human-resources",
-    title: "Deputy Director of Human Resources",
-    department: "strategy-expansion",
-    team: "leadership",
-    type: "leadership",
-    timeCommitment: "6 to 10 hours / week",
-    location: "Remote",
-    openings: 1,
-    requiresOnboardingAgreement: true,
-    summary:
-      "Support the Director of Human Resources in running people operations across the foundation.",
-    responsibilities: [
-      "Partner with the Director of HR on day-to-day operations",
-      "Support onboarding, role coordination, and recordkeeping",
-      "Help maintain internal documentation and member resources",
-    ],
-    qualifications: [
-      "Reliable, detail-oriented, and good at follow-through",
-      "Interested in people operations and organizational growth",
-    ],
-  },
-  {
     slug: "finance-intern",
     title: "Finance Intern",
     department: "strategy-expansion",

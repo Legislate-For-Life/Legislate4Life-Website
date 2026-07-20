@@ -88,27 +88,11 @@ All three are marked **Recruiting** on the About page.
 
 ## 6. Open roles (`src/data/roles.ts`)
 
-**11 roles total.** Edit one file; `/join-us/[role]` pages auto-render.
+**8 internship roles** in `src/data/roles.ts`. Edit one file; `/join-us/[role]` and `/join-us/apply` auto-render.
 
-**Leadership & Administrative** (single openings, require onboarding agreement):
-
-- Director of Human Resources
-- Deputy Director of Human Resources
-- Operations Director
-- Director of Finance
-- Deputy Director of Finance
-- Director of Civic Affairs
-- Deputy Director of Civic Affairs
-
-**Research & Writing:**
-
-- Policy Research Intern (multiple, requires onboarding agreement)
-- **Journalism Intern** (multiple, no agreement) — renamed from "Writing Team Member" in `f5da13a`
-
-**Civic Affairs & Community** (multiple each, no agreement):
-
-- Civic Affairs Team Member
-- **Community Engagement Intern** — renamed from "Community Engagement Volunteer" in `f5da13a`
+- Policy Research Intern, Journalism Intern (Center for Public Policy)
+- Community Engagement Intern, Civic Affairs Intern (Civic Affairs)
+- Finance Intern, Grant Writing Intern, Social Media Intern, Outreach Intern (Strategy & Expansion)
 
 Responsibilities, qualifications, and time commitments are still placeholders until the user sends a full role description doc.
 

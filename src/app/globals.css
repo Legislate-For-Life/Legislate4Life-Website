@@ -63,3 +63,119 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Ken-burns slow zoom for hero background photo */
+@keyframes ken-burns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  50%  { transform: scale(1.06) translate(-1%, 0.5%); }
+  100% { transform: scale(1)    translate(0, 0); }
+}
+
+.hero-ken-burns {
+  animation: ken-burns 28s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Soft gold gradient waves — light washes that drift like waves */
+@keyframes grad-wave-1 {
+  0%,
+  100% {
+    transform: translate(-8%, 0%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(12%, 6%) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes grad-wave-2 {
+  0%,
+  100% {
+    transform: translate(10%, 4%) scale(1.05);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-14%, -8%) scale(1.25);
+    opacity: 0.95;
+  }
+}
+
+@keyframes grad-wave-3 {
+  0%,
+  100% {
+    transform: translate(0%, 8%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(8%, -10%) scale(1.18);
+    opacity: 0.9;
+  }
+}
+
+.hero-grad-wave {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform, opacity;
+}
+
+.hero-grad-wave-1 {
+  width: min(90vw, 920px);
+  height: min(55vh, 520px);
+  top: -5%;
+  left: -15%;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(193, 155, 62, 0.42) 0%,
+    rgba(193, 155, 62, 0.12) 45%,
+    transparent 70%
+  );
+  animation: grad-wave-1 12s ease-in-out infinite;
+}
+
+.hero-grad-wave-2 {
+  width: min(85vw, 860px);
+  height: min(50vh, 480px);
+  bottom: -10%;
+  right: -20%;
+  background: radial-gradient(
+    ellipse 75% 55% at 50% 50%,
+    rgba(212, 183, 101, 0.36) 0%,
+    rgba(193, 155, 62, 0.1) 50%,
+    transparent 72%
+  );
+  animation: grad-wave-2 15s ease-in-out infinite;
+}
+
+.hero-grad-wave-3 {
+  width: min(70vw, 700px);
+  height: min(45vh, 420px);
+  top: 30%;
+  left: 25%;
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 50%,
+    rgba(193, 155, 62, 0.28) 0%,
+    transparent 68%
+  );
+  animation: grad-wave-3 18s ease-in-out infinite;
+}
+
+/* Respect reduced motion sitewide */
+@media (prefers-reduced-motion: reduce) {
+  .hero-ken-burns,
+  .hero-grad-wave-1,
+  .hero-grad-wave-2,
+  .hero-grad-wave-3 {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

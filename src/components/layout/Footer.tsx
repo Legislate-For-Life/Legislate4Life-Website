@@ -8,14 +8,17 @@ import {
   SOCIAL_LINKS,
 } from "@/lib/constants";
 import NewsletterForm from "@/components/sections/NewsletterForm";
+import AmbientGlow from "@/components/effects/AmbientGlow";
 
 const COLUMN_LINK_CLASS =
   "text-sm text-ink-200 hover:text-gold-200 transition-colors";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink-900 text-ink-100 border-t border-gold-600/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <footer className="relative bg-ink-900 text-ink-100 overflow-hidden">
+      {/* Glowing gold rule at top */}
+      <AmbientGlow variant="footer" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-12">
           {/* Brand & tagline */}
           <div className="lg:col-span-4">

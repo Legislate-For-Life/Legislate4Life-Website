@@ -6,6 +6,7 @@ import CTABanner from "@/components/sections/CTABanner";
 import CrisisSupport from "@/components/sections/CrisisSupport";
 import ArticleCard from "@/components/sections/ArticleCard";
 import WhyThisMatters from "@/components/sections/WhyThisMatters";
+import Button from "@/components/ui/Button";
 import { articles } from "@/data/articles";
 import { ORG_DESCRIPTION, ORG_NAME } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
@@ -26,50 +27,36 @@ export default function Home() {
       <CrisisSupport />
       <StatsBar />
 
-      {/* Spotlight / Featured Update */}
-      <section className="pt-10 pb-12 bg-white">
+      {/* Spotlight — open editorial layout, no containing box */}
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl overflow-hidden bg-ink-900 text-ink-100">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_80%_20%,var(--color-gold-400),transparent_60%)]"
-            />
-            <div className="relative grid md:grid-cols-5 gap-6 p-8 sm:p-12 items-center">
-              <div className="md:col-span-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-300 mb-3">
-                  Spotlight
-                </p>
-                <h2 className="text-2xl sm:text-3xl font-bold leading-tight mb-3">
-                  We&apos;re hiring across multiple departments
-                </h2>
-                <p className="text-ink-200 leading-relaxed">
-                  The foundation is actively expanding the Center for Public
-                  Policy, the Civic Affairs Department, and Strategy &amp;
-                  Expansion. If you want to do real work on real issues,
-                  there&apos;s probably a role for you.
-                </p>
-              </div>
-              <div className="md:col-span-2 flex md:justify-end">
-                <Link
-                  href="/join-us"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
-                >
-                  See Open Roles
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </Link>
-              </div>
+          <div
+            className="h-px mb-10"
+            style={{
+              background:
+                "linear-gradient(to right, transparent, rgba(193,155,62,0.5) 30%, rgba(193,155,62,0.5) 70%, transparent)",
+            }}
+            aria-hidden="true"
+          />
+          <div className="grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold-600 mb-4">
+                Spotlight
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-4">
+                We&apos;re hiring across multiple departments
+              </h2>
+              <p className="text-ink-500 leading-relaxed max-w-xl">
+                The foundation is actively expanding the Center for Public
+                Policy, the Civic Affairs Department, and Strategy &amp;
+                Expansion. If you want to do real work on real issues,
+                there&apos;s probably a role for you.
+              </p>
+            </div>
+            <div className="md:col-span-4 md:flex md:justify-end">
+              <Button href="/join-us" size="lg">
+                See Open Roles
+              </Button>
             </div>
           </div>
         </div>
@@ -78,11 +65,11 @@ export default function Home() {
       <WhyThisMatters />
 
       {/* Featured articles */}
-      <section className="pt-10 pb-14 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
+          <div className="flex items-end justify-between mb-10 flex-wrap gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold-600 mb-2">
                 Articles
               </p>
               <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
@@ -93,7 +80,7 @@ export default function Home() {
               href="/articles"
               className="text-sm font-medium text-gold-600 hover:text-gold-700 transition-colors"
             >
-              All articles →
+              All articles &rarr;
             </Link>
           </div>
           <div className="grid gap-8 md:grid-cols-3">

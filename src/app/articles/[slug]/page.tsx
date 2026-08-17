@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { articles } from "@/data/articles";
 import RichTextBody from "@/components/sections/RichTextBody";
+import PolicyBriefPdfViewer from "@/components/sections/PolicyBriefPdfViewer";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   articleSchema,
@@ -54,6 +55,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     day: "numeric",
   });
 
+  const pdfUrl = post.pdfFile ? `/articles/${post.pdfFile}` : null;
+
   return (
     <>
       <JsonLd
@@ -98,11 +101,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </section>
 
+      {pdfUrl ? (
+        <PolicyBriefPdfViewer
+          pdfUrl={pdfUrl}
+          title={post.title}
+          downloadFileName={post.pdfFile!}
+          documentLabel="article"
+        />
+      ) : null}
+
       <article className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RichTextBody content={post.content} />
+          {post.content ? <RichTextBody content={post.content} /> : null}
 
-          <hr className="my-12 border-ink-200" />
+          {post.content ? <hr className="my-12 border-ink-200" /> : null}
 
           <nav
             aria-label="Article navigation"

@@ -1,8 +1,38 @@
 import type { Article } from "@/lib/types";
+import { ORG_NAME } from "@/lib/constants";
 
 // Articles are ordered newest first. To publish a new article, add an entry
-// at the top of this array.
+// at the top of this array. Prefer pdfFile for Writing Team PDFs; content is
+// for HTML articles rendered via RichTextBody.
 export const articles: Article[] = [
+  {
+    slug: "expiration-date-for-bureaucracy",
+    title: "The Government Should Have an Expiration Date for Bureaucracy",
+    excerpt:
+      "A case for putting time limits on bureaucracy so policy systems stay accountable, adaptable, and useful to the public.",
+    date: "2026-08-18",
+    author: ORG_NAME,
+    pdfFile: "expiration-date-for-bureaucracy.pdf",
+  },
+  {
+    slug: "change-how-we-see-farmers",
+    title: "It's Time to Change How We See Farmers",
+    excerpt:
+      "Farmers are more than a seasonal headline. This piece argues for a clearer, more respectful public understanding of the people who grow our food.",
+    date: "2026-08-17",
+    author: ORG_NAME,
+    pdfFile: "change-how-we-see-farmers.pdf",
+  },
+  {
+    slug: "cyclosporiasis-outbreaks-spike",
+    title:
+      "Cyclosporiasis Outbreaks Spike, Farmers Suffer Mental Health Effects",
+    excerpt:
+      "As cyclosporiasis outbreaks rise, this piece looks at the strain on farmers and the mental health effects that follow public health crises in agriculture.",
+    date: "2026-08-16",
+    author: ORG_NAME,
+    pdfFile: "cyclosporiasis-outbreaks-spike.pdf",
+  },
   {
     slug: "the-harvest-nobody-talks-about",
     title: "The Harvest Nobody Talks About",

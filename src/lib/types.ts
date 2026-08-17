@@ -11,7 +11,7 @@ export interface Article {
   author: string;
   /** Markdown-ish body for HTML articles. Optional when pdfFile is set. */
   content?: string;
-  /** PDF filename under /public/articles/ (e.g. "my-piece.pdf"). */
+  /** PDF filename under /public/article-pdfs/ (e.g. "my-piece.pdf"). */
   pdfFile?: string;
 }
 

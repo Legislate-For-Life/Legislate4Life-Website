@@ -55,7 +55,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     day: "numeric",
   });
 
-  const pdfUrl = post.pdfFile ? `/articles/${post.pdfFile}` : null;
+  // PDFs live under /article-pdfs/ (not /articles/) so they do not collide
+  // with the /articles/[slug] App Router page, same idea as /policy-briefs/.
+  const pdfUrl = post.pdfFile ? `/article-pdfs/${post.pdfFile}` : null;
 
   return (
     <>
@@ -70,7 +72,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         ]}
       />
       <section className="bg-ink-900 text-ink-100 pt-10 pb-14 sm:pt-12 sm:pb-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/articles"
             className="inline-flex items-center text-sm text-gold-300 hover:text-gold-200 transition-colors mb-6"
@@ -90,10 +92,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </svg>
             All Articles
           </Link>
+          {pdfUrl && (
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-300 mb-3">
+              Article
+            </p>
+          )}
           <h1 className="text-3xl font-bold sm:text-4xl leading-tight">
             {post.title}
           </h1>
-          <div className="mt-4 flex items-center gap-2 text-sm text-ink-300">
+          <div className="mt-4 flex items-center gap-2 text-sm text-ink-300 flex-wrap">
             <time dateTime={post.date}>{formattedDate}</time>
             <span aria-hidden="true">&middot;</span>
             <span>{post.author}</span>
@@ -101,20 +108,28 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </section>
 
-      {pdfUrl ? (
+      {pdfUrl && (
         <PolicyBriefPdfViewer
           pdfUrl={pdfUrl}
           title={post.title}
           downloadFileName={post.pdfFile!}
           documentLabel="article"
         />
-      ) : null}
+      )}
 
       <article className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {post.content ? <RichTextBody content={post.content} /> : null}
-
-          {post.content ? <hr className="my-12 border-ink-200" /> : null}
+          {post.content ? (
+            <>
+              {pdfUrl && (
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  Read on this page
+                </h2>
+              )}
+              <RichTextBody content={post.content} />
+              <hr className="my-12 border-ink-200" />
+            </>
+          ) : null}
 
           <nav
             aria-label="Article navigation"

@@ -14,7 +14,7 @@ export const roles: Role[] = [
     timeCommitment: "Flexible (typically 6 to 10 hours / week)",
     location: "Remote",
     openings: "multiple",
-    requiresOnboardingAgreement: true,
+    requiresOnboardingAgreement: false,
     summary:
       "Join the national leadership team as a Director. Specific responsibilities are matched to your qualifications and past experience. New Directors complete a one-month trial with a clear goal set for the role we believe fits you best.",
     responsibilities: [

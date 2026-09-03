@@ -4,6 +4,33 @@ import type { Role, RoleDepartment, RoleTeam } from "@/lib/types";
 // qualifications are starting points and may be refined as full role descriptions
 // are finalized.
 export const roles: Role[] = [
+  // ───── National Leadership (Strategy & Expansion) ─────
+  {
+    slug: "national-leadership-team-director",
+    title: "National Leadership Team Director",
+    department: "strategy-expansion",
+    team: "leadership",
+    type: "leadership",
+    timeCommitment: "Flexible (typically 6 to 10 hours / week)",
+    location: "Remote",
+    openings: "multiple",
+    requiresOnboardingAgreement: true,
+    summary:
+      "Join the national leadership team as a Director. Specific responsibilities are matched to your qualifications and past experience. New Directors complete a one-month trial with a clear goal set for the role we believe fits you best.",
+    responsibilities: [
+      "Lead work on the national leadership team in the area that best matches your strengths",
+      "Collaborate with department leads on research, public education, operations, or expansion priorities",
+      "Complete a one-month trial period with a specific goal we set for your placement",
+      "Help set direction, follow through on deliverables, and support the foundation's growth",
+    ],
+    qualifications: [
+      "Specific role requirements depend on your qualifications and past experience",
+      "We match Directors to the responsibilities that fit their background best",
+      "Reliable communication, sound judgment, and comfort taking ownership",
+      "Interest in nonprofit leadership, public education, or civic engagement",
+    ],
+  },
+
   // ───── Center for Public Policy ─────
   {
     slug: "policy-research-intern",

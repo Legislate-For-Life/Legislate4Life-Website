@@ -7,6 +7,11 @@ import Button from "@/components/ui/Button";
 interface JoinUsFormProps {
   roleTitle?: string;
   roleSlug?: string;
+  /** Override the "why join" question label. */
+  whyLabel?: string;
+  whyPlaceholder?: string;
+  /** Ask applicants how much time they can commit each week. */
+  showTimeAvailability?: boolean;
 }
 
 interface SubmitState {
@@ -17,6 +22,9 @@ interface SubmitState {
 export default function JoinUsForm({
   roleTitle,
   roleSlug,
+  whyLabel = "Why do you want to join The Legislative for Life Foundation?",
+  whyPlaceholder = "Tell us what draws you to our work and what you hope to contribute.",
+  showTimeAvailability = false,
 }: JoinUsFormProps = {}) {
   const [state, setState] = useState<SubmitState>({ status: "idle" });
 
@@ -34,6 +42,7 @@ export default function JoinUsForm({
       resume: String(data.get("resume") ?? ""),
       experience: String(data.get("experience") ?? ""),
       why: String(data.get("why") ?? ""),
+      availability: String(data.get("availability") ?? ""),
       role: String(data.get("role") ?? roleSlug ?? ""),
       company: String(data.get("company") ?? ""),
     };
@@ -184,7 +193,7 @@ export default function JoinUsForm({
             htmlFor="applicant-resume"
             className="block text-sm font-medium text-foreground mb-1"
           >
-            Resume Link
+            Resume / CV Link
           </label>
           <input
             id="applicant-resume"
@@ -193,10 +202,30 @@ export default function JoinUsForm({
             required
             disabled={submitting}
             className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
-            placeholder="Google Drive, Dropbox, LinkedIn"
+            placeholder="Google Drive, Dropbox, or LinkedIn URL"
           />
         </div>
       </div>
+
+      {showTimeAvailability && (
+        <div>
+          <label
+            htmlFor="applicant-availability"
+            className="block text-sm font-medium text-foreground mb-1"
+          >
+            Weekly time commitment you can offer
+          </label>
+          <input
+            id="applicant-availability"
+            name="availability"
+            type="text"
+            required
+            disabled={submitting}
+            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
+            placeholder="e.g. 6 to 8 hours per week"
+          />
+        </div>
+      )}
 
       <div>
         <label
@@ -221,7 +250,7 @@ export default function JoinUsForm({
           htmlFor="applicant-why"
           className="block text-sm font-medium text-foreground mb-1"
         >
-          Why do you want to join The Legislative for Life Foundation?
+          {whyLabel}
         </label>
         <textarea
           id="applicant-why"
@@ -230,7 +259,7 @@ export default function JoinUsForm({
           required
           disabled={submitting}
           className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent resize-y disabled:opacity-60"
-          placeholder="Tell us what draws you to our work and what you hope to contribute."
+          placeholder={whyPlaceholder}
         />
       </div>
 

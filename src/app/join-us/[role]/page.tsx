@@ -249,12 +249,25 @@ export default async function RolePage({ params }: RolePageProps) {
               <h2 className="text-2xl font-bold text-foreground mb-3">
                 Apply for this role
               </h2>
-              <p className="text-muted-foreground mb-8">
-                Fill out the short application below. We respond within 1 to 2
-                business days.
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                {data.slug === "national-leadership-team-director"
+                  ? "Share your résumé link, weekly availability, and a short answer about joining the national leadership team. If selected, you will complete a one-month trial with a goal set for the role that fits you best. We respond within 1 to 2 business days."
+                  : "Fill out the short application below. We respond within 1 to 2 business days."}
               </p>
               <Card className="p-6 sm:p-8">
-                <JoinUsForm roleTitle={data.title} roleSlug={data.slug} />
+                <JoinUsForm
+                  roleTitle={data.title}
+                  roleSlug={data.slug}
+                  {...(data.slug === "national-leadership-team-director"
+                    ? {
+                        showTimeAvailability: true,
+                        whyLabel:
+                          "Why do you want to join the national leadership team?",
+                        whyPlaceholder:
+                          "In a few sentences, tell us why you want to join the national leadership team.",
+                      }
+                    : {})}
+                />
               </Card>
             </>
           )}

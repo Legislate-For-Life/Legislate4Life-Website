@@ -19,6 +19,7 @@ interface ApplicationPayload {
   resume?: string;
   experience?: string;
   why?: string;
+  availability?: string;
   role?: string;
   roleChoices?: string[];
   // Honeypot.
@@ -91,6 +92,7 @@ export async function POST(request: Request) {
   const resume = (body.resume ?? "").trim();
   const experience = (body.experience ?? "").trim();
   const why = (body.why ?? "").trim();
+  const availability = (body.availability ?? "").trim();
   const roleSlug = (body.role ?? "").trim();
   const roleChoices = (body.roleChoices ?? []).map((choice) => choice.trim());
   const applicationType =
@@ -100,6 +102,17 @@ export async function POST(request: Request) {
   if (!name || !email || !phone || !resume || !experience || !why) {
     return NextResponse.json(
       { error: "All fields are required." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    roleSlug === "national-leadership-team-director" &&
+    applicationType === "leadership" &&
+    !availability
+  ) {
+    return NextResponse.json(
+      { error: "Please share your weekly time commitment." },
       { status: 400 },
     );
   }
@@ -123,7 +136,8 @@ export async function POST(request: Request) {
     phone.length > 50 ||
     resume.length > 1_000 ||
     experience.length > 10_000 ||
-    why.length > 10_000
+    why.length > 10_000 ||
+    availability.length > 500
   ) {
     return NextResponse.json(
       { error: "One of the fields is too long." },
@@ -202,6 +216,11 @@ Role:    ${roleTitle}${matchingRole ? ` (${matchingRole.slug})` : ""}`;
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Email</td><td style="padding:8px 12px;"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Phone</td><td style="padding:8px 12px;"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></td></tr>
         <tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Resume</td><td style="padding:8px 12px;"><a href="${escapeHtml(resume)}" target="_blank" rel="noopener noreferrer">${escapeHtml(resume)}</a></td></tr>
+        ${
+          availability
+            ? `<tr><td style="padding:8px 12px; background:#f9fafb; font-weight:600; vertical-align:top;">Time commitment</td><td style="padding:8px 12px;">${escapeHtml(availability)}</td></tr>`
+            : ""
+        }
       </table>
       <h3 style="font-size: 14px; margin: 24px 0 8px; font-weight: 600;">Relevant experience</h3>
       <p style="white-space: pre-wrap; line-height: 1.55; font-size: 14px; margin: 0;">${escapeHtml(experience)}</p>
@@ -219,7 +238,7 @@ Name:    ${name}
 Email:   ${email}
 Phone:   ${phone}
 Resume:  ${resume}
-
+${availability ? `Time commitment: ${availability}\n` : ""}
 Relevant experience:
 ${experience}
 

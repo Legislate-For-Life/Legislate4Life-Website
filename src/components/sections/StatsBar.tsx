@@ -4,7 +4,7 @@ import Reveal from "@/components/effects/Reveal";
 const stats: StatItem[] = [
   { value: "3", label: "Operating divisions driving our work" },
   { value: "2", label: "States actively researched (VA, TX)" },
-  { value: "8+", label: "Open roles for students, researchers, and writers" },
+  { value: "9+", label: "Open roles for students, researchers, and writers" },
   { value: "100%", label: "Volunteer-led, mission-driven, nonpartisan" },
 ];
 

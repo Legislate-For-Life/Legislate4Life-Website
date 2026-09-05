@@ -164,47 +164,47 @@ export default function JoinUsPage() {
 
       {/* Application paths */}
       <section className="py-14 bg-cream-50 border-b border-ink-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="p-6 sm:p-7 h-full">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
-                Internships
-              </p>
-              <h2 className="text-2xl font-bold text-foreground mb-3">
-                Apply for an internship
-              </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                Apply once for any internship role, including high school
-                internships. Rank your top three positions and we&apos;ll assign
-                you to the best fit across departments.
-              </p>
-              <Link
-                href="/join-us/apply"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
-              >
-                Apply for an internship
-              </Link>
-            </Card>
-            <Card className="p-6 sm:p-7 h-full">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
-                Leadership
-              </p>
-              <h2 className="text-2xl font-bold text-foreground mb-3">
-                Role-specific applications
-              </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                Leadership openings use a dedicated application on each role
-                page. Browse the directory below and apply directly for the
-                position you want.
-              </p>
-              <a
-                href="#open-roles"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-ink-900 text-ink-900 font-semibold hover:bg-ink-900 hover:text-gold-200 transition-colors"
-              >
-                Browse leadership roles
-              </a>
-            </Card>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <Card className="p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
+              National Leadership
+            </p>
+            <h2 className="text-2xl font-bold text-foreground mb-3">
+              National Leadership Team Director
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-3xl">
+              Join the national leadership team as a Director. Responsibilities
+              are matched to your qualifications and past experience. New
+              Directors complete a one-month trial with a goal set for the role
+              that fits them best.
+            </p>
+            <Link
+              href="/join-us/national-leadership-team-director#apply"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gold-400 text-ink-900 font-semibold hover:bg-gold-300 transition-colors"
+            >
+              Apply for Director
+            </Link>
+          </Card>
+
+          <Card className="p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600 mb-2">
+              Internships
+            </p>
+            <h2 className="text-2xl font-bold text-foreground mb-3">
+              Apply for an internship
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-3xl">
+              Apply once for any internship role, including high school
+              internships. Rank your top three positions and we&apos;ll assign
+              you to the best fit across departments.
+            </p>
+            <Link
+              href="/join-us/apply"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-ink-900 text-ink-900 font-semibold hover:bg-ink-900 hover:text-gold-200 transition-colors"
+            >
+              Apply for an internship
+            </Link>
+          </Card>
         </div>
       </section>
 

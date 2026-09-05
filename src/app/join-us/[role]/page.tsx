@@ -251,7 +251,7 @@ export default async function RolePage({ params }: RolePageProps) {
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 {data.slug === "national-leadership-team-director"
-                  ? "Share your résumé link, weekly availability, and a short answer about joining the national leadership team. If selected, you will complete a one-month trial with a goal set for the role that fits you best. We respond within 1 to 2 business days."
+                  ? "Upload your résumé, share your weekly availability, and answer a short question about joining the national leadership team. If selected, you will complete a one-month trial with a goal set for the role that fits you best. We respond within 1 to 2 business days."
                   : "Fill out the short application below. We respond within 1 to 2 business days."}
               </p>
               <Card className="p-6 sm:p-8">
@@ -261,6 +261,7 @@ export default async function RolePage({ params }: RolePageProps) {
                   {...(data.slug === "national-leadership-team-director"
                     ? {
                         showTimeAvailability: true,
+                        resumeAsFile: true,
                         whyLabel:
                           "Why do you want to join the national leadership team?",
                         whyPlaceholder:

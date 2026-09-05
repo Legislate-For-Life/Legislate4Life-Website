@@ -148,8 +148,11 @@ export default function PrivacyPage() {
               <li>Your email address</li>
               <li>Your phone number</li>
               <li>
-                A link to your resume or CV (you choose where to host it; we
-                do not store the document itself)
+                Your resume or CV, either as an uploaded PDF or Word file (for
+                some leadership and chapter applications) or as a link you
+                choose to host (for internship applications); uploaded files are
+                delivered with the application email and are not stored as a
+                permanent file library on our servers
               </li>
               <li>Your description of relevant experience</li>
               <li>Your reasons for wanting to join the foundation</li>

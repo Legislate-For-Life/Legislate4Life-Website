@@ -12,6 +12,8 @@ interface JoinUsFormProps {
   whyPlaceholder?: string;
   /** Ask applicants how much time they can commit each week. */
   showTimeAvailability?: boolean;
+  /** Upload a resume file instead of a URL (chapter-application style). */
+  resumeAsFile?: boolean;
 }
 
 interface SubmitState {
@@ -19,12 +21,20 @@ interface SubmitState {
   message?: string;
 }
 
+const MAX_RESUME_BYTES = 5 * 1024 * 1024;
+const ALLOWED_RESUME_TYPES = new Set([
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
+
 export default function JoinUsForm({
   roleTitle,
   roleSlug,
   whyLabel = "Why do you want to join The Legislative for Life Foundation?",
   whyPlaceholder = "Tell us what draws you to our work and what you hope to contribute.",
   showTimeAvailability = false,
+  resumeAsFile = false,
 }: JoinUsFormProps = {}) {
   const [state, setState] = useState<SubmitState>({ status: "idle" });
 
@@ -34,27 +44,61 @@ export default function JoinUsForm({
 
     const form = e.currentTarget;
     const data = new FormData(form);
-    const payload = {
-      applicationType: "leadership",
-      name: String(data.get("name") ?? ""),
-      email: String(data.get("email") ?? ""),
-      phone: String(data.get("phone") ?? ""),
-      resume: String(data.get("resume") ?? ""),
-      experience: String(data.get("experience") ?? ""),
-      why: String(data.get("why") ?? ""),
-      availability: String(data.get("availability") ?? ""),
-      role: String(data.get("role") ?? roleSlug ?? ""),
-      company: String(data.get("company") ?? ""),
-    };
+
+    if (!data.get("role") && roleSlug) {
+      data.set("role", roleSlug);
+    }
+    data.set("applicationType", "leadership");
+
+    if (resumeAsFile) {
+      const resumeEntry = data.get("resume");
+      if (!(resumeEntry instanceof File) || resumeEntry.size === 0) {
+        setState({
+          status: "error",
+          message: "Please upload your resume.",
+        });
+        return;
+      }
+      if (resumeEntry.size > MAX_RESUME_BYTES) {
+        setState({
+          status: "error",
+          message: "Resume must be 5 MB or smaller.",
+        });
+        return;
+      }
+      if (!ALLOWED_RESUME_TYPES.has(resumeEntry.type)) {
+        setState({
+          status: "error",
+          message: "Please upload a PDF or Word document.",
+        });
+        return;
+      }
+    }
 
     setState({ status: "submitting" });
 
     try {
-      const res = await fetch("/api/applications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "/api/applications",
+        resumeAsFile
+          ? { method: "POST", body: data }
+          : {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                applicationType: "leadership",
+                name: String(data.get("name") ?? ""),
+                email: String(data.get("email") ?? ""),
+                phone: String(data.get("phone") ?? ""),
+                resume: String(data.get("resume") ?? ""),
+                experience: String(data.get("experience") ?? ""),
+                why: String(data.get("why") ?? ""),
+                availability: String(data.get("availability") ?? ""),
+                role: String(data.get("role") ?? roleSlug ?? ""),
+                company: String(data.get("company") ?? ""),
+              }),
+            },
+      );
 
       if (!res.ok) {
         const json = (await res.json().catch(() => ({}))) as { error?: string };
@@ -170,24 +214,65 @@ export default function JoinUsForm({
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div>
+        <label
+          htmlFor="applicant-phone"
+          className="block text-sm font-medium text-foreground mb-1"
+        >
+          Phone Number
+        </label>
+        <input
+          id="applicant-phone"
+          name="phone"
+          type="tel"
+          required
+          disabled={submitting}
+          className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
+          placeholder="(555) 123-4567"
+        />
+      </div>
+
+      {resumeAsFile ? (
         <div>
           <label
-            htmlFor="applicant-phone"
+            htmlFor="applicant-resume"
             className="block text-sm font-medium text-foreground mb-1"
           >
-            Phone Number
+            Resume Upload
           </label>
           <input
-            id="applicant-phone"
-            name="phone"
-            type="tel"
+            id="applicant-resume"
+            name="resume"
+            type="file"
             required
             disabled={submitting}
-            className="w-full px-4 py-3 rounded-lg border border-ink-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent disabled:opacity-60"
-            placeholder="(555) 123-4567"
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            className="w-full text-sm text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gold-100 file:text-ink-900 file:font-semibold hover:file:bg-gold-200 disabled:opacity-60"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (!file) return;
+              if (file.size > MAX_RESUME_BYTES) {
+                setState({
+                  status: "error",
+                  message: "Resume must be 5 MB or smaller.",
+                });
+                event.target.value = "";
+                return;
+              }
+              if (!ALLOWED_RESUME_TYPES.has(file.type)) {
+                setState({
+                  status: "error",
+                  message: "Please upload a PDF or Word document.",
+                });
+                event.target.value = "";
+              }
+            }}
           />
+          <p className="mt-1 text-xs text-muted-foreground">
+            PDF or Word format, 5 MB max.
+          </p>
         </div>
+      ) : (
         <div>
           <label
             htmlFor="applicant-resume"
@@ -205,7 +290,7 @@ export default function JoinUsForm({
             placeholder="Google Drive, Dropbox, or LinkedIn URL"
           />
         </div>
-      </div>
+      )}
 
       {showTimeAvailability && (
         <div>
